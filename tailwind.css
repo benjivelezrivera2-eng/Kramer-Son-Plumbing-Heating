@@ -19,13 +19,8 @@
     text-wrap: balance;
   }
 
-  #hero,
-  #services,
-  #why-choose-us,
-  #service-areas,
-  #reviews,
-  #footer {
-    scroll-margin-top: 7.5rem;
+  main {
+    scroll-margin-top: 5rem;
   }
 
   .all-unset {
