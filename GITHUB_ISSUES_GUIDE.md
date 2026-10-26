@@ -2,9 +2,9 @@
 
 Repo: [benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating)
 
-This repo is the Kramer & Son Plumbing & Heating demo website (Vite + React). The AI receptionist lives in Vapi, and caller-summary texts go out through Twilio. Those are tracked as issues here, but the fix is not website code.
+This repo is the Kramer & Son Plumbing & Heating demo website (Vite + React) for the AI receptionist offer. The voice agent (Vapi assistant, Twilio number, caller-summary texts) lives outside this repo. Track that work here as issues, but the fix is not website code.
 
-Follow this on every task. Benji confirms the issue before any code is written.
+Follow this guide on every task. Benji confirms the issue before any code is written.
 
 ## Prime rule
 
@@ -50,7 +50,7 @@ Use only labels that already exist. Check with `gh label list --repo benjivelezr
 - **bug:** Errors or broken functionality
 - **documentation:** Changes to README, guides, or code comments
 - **refactor:** Code cleanup with no change in behavior
-- **urgent:** Blocks something critical, like the site, the demo line, or getting paid
+- **urgent:** Blocks something critical, like the site, the demo line, Monday's sales calls, or getting paid
 
 `voice-agent` is not on this repo. Ask Benji to create it before using it for Vapi or Twilio work.
 
@@ -79,4 +79,4 @@ Never add or delete issues, this repo, or branches unless Benji explicitly says 
 
 ## Secrets
 
-Keep tokens, API keys, and other secrets out of issues, comments, and code. That includes Vapi keys, Twilio credentials, and anything that would send a real text.
+Keep tokens, API keys, client phone numbers, and other secrets out of issues, comments, and code. That includes Vapi keys, Twilio credentials, and anything that would send a real text.
