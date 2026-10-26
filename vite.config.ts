@@ -13,7 +13,7 @@ function shareMeta(): Plugin {
   const title = escapeHtml(business.fullName);
   const description = escapeHtml(business.shareDescription);
   const url = business.siteUrl;
-  const image = `${url}/og.png`;
+  const image = `${url}/og.png?v=2`;
   const alt = escapeHtml(`${business.name} ${business.niche}`);
 
   const tags = `
