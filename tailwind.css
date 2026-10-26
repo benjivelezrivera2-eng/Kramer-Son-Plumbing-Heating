@@ -3,6 +3,31 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  #hero,
+  #services,
+  #why-choose-us,
+  #service-areas,
+  #reviews,
+  #footer {
+    scroll-margin-top: 7.5rem;
+  }
+
   .all-unset {
     all: unset;
   }

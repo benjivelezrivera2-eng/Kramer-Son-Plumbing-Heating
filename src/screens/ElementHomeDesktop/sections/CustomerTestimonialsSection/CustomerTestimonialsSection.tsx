@@ -26,7 +26,7 @@ export const CustomerTestimonialsSection = (): JSX.Element => {
       className="flex w-full flex-col gap-12 bg-white px-6 py-16 sm:px-10 sm:py-20 lg:px-16 lg:py-24"
     >
       <header className="flex w-full flex-col items-center gap-3 text-center">
-        <p className="[font-family:'Geist',Helvetica] text-sm font-bold leading-normal text-[#2a8b8b]">
+        <p className="[font-family:'Geist',Helvetica] text-sm font-bold leading-normal text-[#1f7777]">
           CUSTOMER TESTIMONIALS
         </p>
         <h2 className="[font-family:'Gabarito',Helvetica] text-[30px] font-extrabold leading-normal tracking-[0] text-[#1b2a4a] sm:text-[38px]">
@@ -47,10 +47,15 @@ export const CustomerTestimonialsSection = (): JSX.Element => {
                 <h3 className="[font-family:'Gabarito',Helvetica] text-base font-bold leading-normal tracking-[0] text-[#1b2a4a]">
                   {testimonial.name}
                 </h3>
-                <div className="flex shrink-0 items-center gap-0.5">
+                <div
+                  className="flex shrink-0 items-center gap-0.5"
+                  role="img"
+                  aria-label="5 out of 5"
+                >
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
+                      aria-hidden="true"
                       className="h-4 w-4 fill-[#d4a843] text-[#d4a843]"
                     />
                   ))}

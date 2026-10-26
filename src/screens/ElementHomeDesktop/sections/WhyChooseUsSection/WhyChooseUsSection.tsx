@@ -35,7 +35,7 @@ export const WhyChooseUsSection = (): JSX.Element => {
       className="flex w-full flex-col items-start gap-12 bg-slate-50 px-4 py-16 sm:px-8 lg:px-16 lg:py-24"
     >
       <header className="flex w-full flex-col items-center gap-3">
-        <p className="[font-family:'Geist',Helvetica] text-sm font-bold leading-normal text-[#2a8b8b]">
+        <p className="[font-family:'Geist',Helvetica] text-sm font-bold leading-normal text-[#1f7777]">
           WHY CHOOSE US
         </p>
         <h2 className="w-full text-center [font-family:'Gabarito',Helvetica] text-[26px] font-extrabold leading-tight tracking-[0] text-[#1b2a4a] sm:text-[38px]">

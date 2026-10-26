@@ -18,7 +18,8 @@
     "tailwindcss-animate": "1.0.7",
     "class-variance-authority": "^0.7.0",
     "@radix-ui/react-accordion": "^1.2.1",
-    "@radix-ui/react-slot": "^1.1.0"
+    "@radix-ui/react-slot": "^1.1.0",
+    "@vercel/analytics": "^2.0.1"
   },
   "devDependencies": {
     "@types/react": "18.3.28",

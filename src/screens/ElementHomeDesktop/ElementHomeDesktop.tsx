@@ -1,3 +1,4 @@
+import { Phone } from "lucide-react";
 import { CustomerTestimonialsSection } from "./sections/CustomerTestimonialsSection";
 import { FrequentlyAskedQuestionsSection } from "./sections/FrequentlyAskedQuestionsSection";
 import { PlumbingHeroSection } from "./sections/PlumbingHeroSection/PlumbingHeroSection";
@@ -7,16 +8,37 @@ import { ServiceProcessSection } from "./sections/ServiceProcessSection";
 import { SiteFooterSection } from "./sections/SiteFooterSection/SiteFooterSection";
 import { SiteHeaderSection } from "./sections/SiteHeaderSection/SiteHeaderSection";
 import { WhyChooseUsSection } from "./sections/WhyChooseUsSection/WhyChooseUsSection";
-import { ServiceRequestProvider } from "../../components/ServiceRequestModal";
+import {
+  ServiceRequestProvider,
+  useServiceRequest,
+} from "../../components/ServiceRequestModal";
+
+function MobileCallBar(): JSX.Element | null {
+  const { isOpen } = useServiceRequest();
+  if (isOpen) return null;
+
+  return (
+    <a
+      href="tel:+19705550142"
+      className="sticky bottom-0 z-30 flex w-full items-center justify-center gap-2 bg-[#d4a843] px-4 py-3 text-[#1b2a4a] md:hidden"
+      style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+    >
+      <Phone className="h-5 w-5" aria-hidden="true" />
+      <span className="[font-family:'Geist',Helvetica] text-base font-bold leading-normal">
+        Call (970) 555-0142
+      </span>
+    </a>
+  );
+}
 
 export const ElementHomeDesktop = (): JSX.Element => {
   return (
     <ServiceRequestProvider>
-      <div className="flex min-h-screen w-full flex-col items-start overflow-x-hidden bg-white">
-        <header className="w-full">
+      <div className="flex min-h-screen w-full flex-col items-start overflow-x-clip bg-white">
+        <div className="w-full">
           <div className="flex min-h-9 w-full flex-wrap items-center justify-between gap-2 bg-[#1b2a4a] px-4 py-1 sm:px-8 lg:px-16">
             <div className="inline-flex shrink-0 items-start rounded border border-solid border-[#d4a843] bg-[#d4a84315] px-2 py-1">
-              <span className="[font-family:'Geist',Helvetica] text-[10px] font-bold leading-normal text-[#d4a843]">
+              <span className="[font-family:'Geist',Helvetica] text-sm font-bold leading-normal text-[#d4a843]">
                 DESIGN PROPOSAL • NOT A LIVE SITE
               </span>
             </div>
@@ -40,7 +62,7 @@ export const ElementHomeDesktop = (): JSX.Element => {
             </div>
           </div>
           <SiteHeaderSection />
-        </header>
+        </div>
         <main className="flex w-full flex-col">
           <PlumbingHeroSection />
           <PlumbingServicesSection />
@@ -49,6 +71,7 @@ export const ElementHomeDesktop = (): JSX.Element => {
           <ServiceAreasSection />
           <CustomerTestimonialsSection />
           <FrequentlyAskedQuestionsSection />
+          <MobileCallBar />
         </main>
         <SiteFooterSection />
       </div>

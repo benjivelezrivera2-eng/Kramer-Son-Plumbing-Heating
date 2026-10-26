@@ -7,7 +7,6 @@ import {
   Settings,
   Wrench,
 } from "lucide-react";
-import { Badge } from "../../../../components/ui/badge";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
 import { useServiceRequest } from "../../../../components/ServiceRequestModal";
@@ -78,20 +77,12 @@ export const PlumbingServicesSection = (): JSX.Element => {
       className="flex w-full flex-col gap-12 bg-white px-6 py-16 sm:px-10 lg:px-16 lg:py-24"
     >
       <header className="flex w-full flex-col items-start gap-3">
-        <p className="[font-family:'Geist',Helvetica] text-sm font-bold leading-normal text-[#2a8b8b]">
+        <p className="[font-family:'Geist',Helvetica] text-sm font-bold leading-normal text-[#1f7777]">
           COMPREHENSIVE OFFERINGS
         </p>
-        <div className="flex w-full flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-          <h2 className="[font-family:'Gabarito',Helvetica] text-[26px] font-extrabold leading-normal tracking-[0] text-[#1b2a4a] sm:text-[38px]">
-            Our Plumbing &amp; Heating Services
-          </h2>
-          <Badge
-            variant="outline"
-            className="h-auto rounded border-[#2a8b8b] bg-[#2a8b8b15] px-1.5 py-0.5 [font-family:'Geist',Helvetica] text-[9px] font-semibold leading-normal text-[#2a8b8b]"
-          >
-            PROPOSED • PENDING CONFIRMATION
-          </Badge>
-        </div>
+        <h2 className="[font-family:'Gabarito',Helvetica] text-[26px] font-extrabold leading-normal tracking-[0] text-[#1b2a4a] sm:text-[38px]">
+          Our Plumbing &amp; Heating Services
+        </h2>
       </header>
       <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {plumbingServices.map((service) => {

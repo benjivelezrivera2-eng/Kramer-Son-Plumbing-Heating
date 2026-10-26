@@ -32,7 +32,7 @@ export const ServiceProcessSection = (): JSX.Element => {
   return (
     <section className="flex w-full flex-col items-start gap-12 bg-white px-4 py-16 sm:px-8 md:px-16 md:py-24">
       <header className="flex w-full flex-col items-center gap-3">
-        <p className="[font-family:'Geist',Helvetica] text-sm font-bold leading-[normal] text-[#2a8b8b]">
+        <p className="[font-family:'Geist',Helvetica] text-sm font-bold leading-[normal] text-[#1f7777]">
           OUR SIMPLE PROCESS
         </p>
         <h2 className="[font-family:'Gabarito',Helvetica] text-center text-[30px] font-extrabold leading-[normal] tracking-[0] text-[#1b2a4a] sm:text-[38px]">

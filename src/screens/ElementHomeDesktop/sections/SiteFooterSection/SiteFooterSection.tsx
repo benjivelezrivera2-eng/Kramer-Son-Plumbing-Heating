@@ -12,11 +12,6 @@ const quickLinks = [
   { label: "Reviews", targetId: "reviews" },
 ];
 
-function scrollToId(id: string) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
 export const SiteFooterSection = (): JSX.Element => {
   const { openModal } = useServiceRequest();
 
@@ -39,7 +34,7 @@ export const SiteFooterSection = (): JSX.Element => {
             Locally operated.
           </p>
           <span className="inline-flex items-start rounded border border-solid border-[#d4a843] bg-[#d4a84315] px-2 py-1">
-            <span className="[font-family:'Geist',Helvetica] text-[10px] font-bold leading-normal text-[#d4a843]">
+            <span className="[font-family:'Geist',Helvetica] text-sm font-bold leading-normal text-[#d4a843]">
               DESIGN PROPOSAL • NOT A LIVE SITE
             </span>
           </span>
@@ -52,14 +47,13 @@ export const SiteFooterSection = (): JSX.Element => {
             Quick Links
           </h2>
           {quickLinks.map((link) => (
-            <button
+            <a
               key={link.label}
-              type="button"
-              onClick={() => scrollToId(link.targetId)}
+              href={`#${link.targetId}`}
               className="[font-family:'Geist',Helvetica] text-sm font-normal leading-normal tracking-[0] text-slate-50 opacity-90 transition-opacity hover:opacity-100"
             >
               {link.label}
-            </button>
+            </a>
           ))}
         </nav>
         <section className="flex flex-col items-start gap-4">
