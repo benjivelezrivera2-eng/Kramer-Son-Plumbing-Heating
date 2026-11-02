@@ -1,8 +1,9 @@
 import { Menu, Phone, X } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { CallButton } from "./CallButton";
 import { business } from "../config/business";
+import { useAuth } from "../lib/AuthProvider";
+import { CallButton } from "./CallButton";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -22,6 +23,11 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
 
 export function SiteHeader(): JSX.Element {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { session } = useAuth();
+  const officeLink = session
+    ? { label: "Office", to: "/admin" }
+    : { label: "Shop login", to: "/login" };
+  const links = [...navItems, officeLink];
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur">
@@ -37,7 +43,7 @@ export function SiteHeader(): JSX.Element {
 
         <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
           <ul className="flex items-center gap-8">
-            {navItems.map((item) => (
+            {links.map((item) => (
               <li key={item.to}>
                 <NavLink to={item.to} end={item.to === "/"} className={linkClass}>
                   {item.label}
@@ -75,7 +81,7 @@ export function SiteHeader(): JSX.Element {
       {menuOpen && (
         <div className="border-t border-slate-200 bg-white px-4 py-3 lg:hidden">
           <ul className="flex flex-col">
-            {navItems.map((item) => (
+            {links.map((item) => (
               <li key={item.to}>
                 <NavLink
                   to={item.to}

@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import { business } from "../config/business";
 import { useAuth } from "../lib/AuthProvider";
@@ -43,9 +43,12 @@ export function LoginPage(): JSX.Element {
         </p>
       </div>
       <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 py-12">
-        <p className="[font-family:'Geist',Helvetica] text-xs font-medium tracking-wide text-[#2a7a78]">
+        <Link
+          to="/"
+          className="[font-family:'Geist',Helvetica] text-xs font-medium tracking-wide text-[#2a7a78] hover:text-[#1f5c5b]"
+        >
           {business.niche}
-        </p>
+        </Link>
         <h1 className="mt-2 [font-family:'Gabarito',Helvetica] text-[32px] font-extrabold text-[#142033]">
           Shop login
         </h1>

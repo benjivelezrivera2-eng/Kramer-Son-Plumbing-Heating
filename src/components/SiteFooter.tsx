@@ -8,6 +8,7 @@ const footerLinks = [
   { label: "Book", to: "/book" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
+  { label: "Shop login", to: "/login" },
 ];
 
 export function SiteFooter(): JSX.Element {
