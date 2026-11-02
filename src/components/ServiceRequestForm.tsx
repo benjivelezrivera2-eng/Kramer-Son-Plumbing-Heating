@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 import { business } from "../config/business";
-import { supabase } from "../lib/supabase";
 
 type FormState = {
   name: string;
@@ -35,9 +33,8 @@ export function ServiceRequestForm(): JSX.Element {
     phone?: string;
     email?: string;
   }>({});
-  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const nextErrors: { name?: string; phone?: string; email?: string } = {};
     if (!form.name.trim()) nextErrors.name = "Name is required";
@@ -47,26 +44,7 @@ export function ServiceRequestForm(): JSX.Element {
     }
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
-
-    setSubmitting(true);
-    const { data, error } = await supabase.functions.invoke("create-lead", {
-      body: {
-        source: "contact_form",
-        name: form.name.trim(),
-        phone: form.phone.trim(),
-        email: form.email.trim(),
-        city: form.city.trim(),
-        description: form.description.trim(),
-      },
-    });
-    setSubmitting(false);
-
-    if (error || !data?.lead_id) {
-      toast.error("We could not send that. Check the fields and try again.");
-      return;
-    }
-
-    navigate("/confirmation");
+    navigate("/book");
   };
 
   return (
@@ -177,10 +155,9 @@ export function ServiceRequestForm(): JSX.Element {
 
       <button
         type="submit"
-        disabled={submitting}
-        className="mt-1 h-11 rounded-md bg-[#c9a04a] px-6 text-sm font-semibold text-[#142033] transition-colors hover:bg-[#b8903f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#142033] focus-visible:ring-offset-2 disabled:opacity-60"
+        className="mt-1 h-11 rounded-md bg-[#c9a04a] px-6 text-sm font-semibold text-[#142033] transition-colors hover:bg-[#b8903f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#142033] focus-visible:ring-offset-2"
       >
-        {submitting ? "Sending…" : "Send request"}
+        Pick a visit window
       </button>
     </form>
   );

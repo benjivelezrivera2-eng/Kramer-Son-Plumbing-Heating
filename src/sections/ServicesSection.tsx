@@ -7,11 +7,9 @@ import {
   Settings,
   Wrench,
 } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { business } from "../config/business";
-import { slugify, type ServiceType } from "../lib/shop";
-import { supabase } from "../lib/supabase";
+import { slugify } from "../lib/shop";
 
 const serviceIcons: Record<string, typeof Droplets> = {
   "Drain Cleaning": Droplets,
@@ -37,28 +35,10 @@ export function ServicesSection({
   limit,
   showCommercial = true,
 }: ServicesSectionProps): JSX.Element {
-  const fallback: Card[] = business.services.map((service) => ({
+  const items: Card[] = business.services.map((service) => ({
     ...service,
     slug: slugify(service.title),
   }));
-  const [items, setItems] = useState<Card[]>(fallback);
-
-  useEffect(() => {
-    let mounted = true;
-    supabase
-      .from("service_types")
-      .select("slug, title, description")
-      .eq("is_active", true)
-      .order("sort_order")
-      .then(({ data }) => {
-        if (!mounted || !data?.length) return;
-        setItems(data as Card[]);
-      });
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
   const shown = limit ? items.slice(0, limit) : items;
 
   return (

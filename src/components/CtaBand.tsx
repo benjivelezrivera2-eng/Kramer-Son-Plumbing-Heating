@@ -11,8 +11,8 @@ export function CtaBand(): JSX.Element {
             Need someone out today?
           </h2>
           <p className="mt-2 max-w-xl [font-family:'Geist',Helvetica] text-sm leading-6 text-slate-300">
-            Call the shop or send a request. We take plumbing and heating jobs in{" "}
-            {business.city} and the towns around it.
+            Call, or book a morning or afternoon window. We take plumbing and
+            heating jobs in {business.city} and the towns around it.
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
@@ -20,10 +20,10 @@ export function CtaBand(): JSX.Element {
             Call {business.phoneDisplay}
           </CallButton>
           <Link
-            to="/contact"
+            to="/book"
             className="inline-flex h-11 items-center justify-center rounded-md border border-white/30 px-5 text-sm font-semibold text-white hover:bg-white/10"
           >
-            Request service
+            Book a visit
           </Link>
         </div>
       </div>

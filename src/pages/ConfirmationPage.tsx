@@ -18,8 +18,8 @@ export function ConfirmationPage(): JSX.Element {
       </h1>
       <p className="mt-3 [font-family:'Geist',Helvetica] text-base leading-7 text-slate-700">
         {isBooking
-          ? "We booked the window. Check your email for a private link to reschedule or cancel. No account needed."
-          : "We got your request. The shop will call to confirm. Check your email for a copy."}
+          ? "You're on the calendar. Check the confirmation from the booking page."
+          : "Next step is to pick a visit window."}
       </p>
       {isBooking && token ? (
         <Link

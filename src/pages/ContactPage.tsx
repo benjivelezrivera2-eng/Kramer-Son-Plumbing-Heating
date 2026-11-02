@@ -14,8 +14,7 @@ export function ContactPage(): JSX.Element {
           Request a visit
         </h1>
         <p className="mt-3 mb-8 max-w-xl [font-family:'Geist',Helvetica] text-base leading-7 text-slate-700">
-          Tell us the problem, a number we can reach, and an email. This goes
-          to the shop office right away.
+          Name, phone, and email, then pick a visit window on the next page.
         </p>
         <ServiceRequestForm />
       </div>

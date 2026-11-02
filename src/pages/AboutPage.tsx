@@ -16,9 +16,9 @@ export function AboutPage(): JSX.Element {
           A local {business.niche.toLowerCase()} shop
         </h1>
         <p className="mt-3 max-w-2xl [font-family:'Geist',Helvetica] text-base leading-7 text-slate-700">
-          {business.name} handles plumbing and heating for homes in{" "}
+          {business.fullName} handles plumbing and heating for homes in{" "}
           {business.city} and nearby towns. Call for the jobs that cannot wait,
-          or send a request and we will get you on the board.
+          or book a visit window.
         </p>
       </section>
       <ReasonsSection />

@@ -1,18 +1,19 @@
 export const business = {
-  name: "Business Name",
+  name: "Kramer & Son",
   niche: "Plumbing & Heating",
-  fullName: "Business Name Plumbing & Heating",
+  fullName: "Kramer & Son Plumbing & Heating",
   siteUrl: "https://kramer-son-plumbing-heating.vercel.app",
   shareDescription:
-    "Plumbing and heating help for the house. Same-day visits, clear prices, and a form to request a tech.",
+    "Plumbing and heating for homes in Sterling, Fort Morgan, Brush, and Greeley. Call or book a visit window.",
   phoneDisplay: "(970) 555-0142",
   phoneHref: "tel:+19705550142",
-  city: "Your city",
-  hours: "Weekdays, plus emergency calls",
-  proposalNote: "Sample site — not a live shop",
+  calendlyUrl: "https://calendly.com/benjivelezrivera2/new-meeting",
+  city: "Sterling, CO",
+  hours: "Weekdays 8–5, plus after-hours emergencies",
+  proposalNote: "Sterling, Fort Morgan, Brush, and Greeley",
   hero: {
-    headline: "Plumbing and heating help for the house",
-    body: "Same-day visits, clear prices, and a tech who shows up with the parts. Drain clogs, water heaters, leaks, and furnaces.",
+    headline: "The plumber who actually shows up",
+    body: "Drains, water heaters, leaks, and no-heat calls. Book a morning or afternoon window, or call if it cannot wait.",
     imageAlt: "Technician working on a home plumbing and heating job",
   },
   services: [
@@ -64,7 +65,7 @@ export const business = {
   reasons: [
     {
       title: "Local dispatch",
-      description: "We run from your city and aim for a same-day window.",
+      description: "We run from Sterling and aim for a same-day window.",
     },
     {
       title: "Upfront pricing",
@@ -81,8 +82,8 @@ export const business = {
   ],
   process: [
     {
-      title: "Call or send a request",
-      description: "Tell us what's going on. We get you on the board.",
+      title: "Call or book a window",
+      description: "Tell us what is going on. Pick a morning or afternoon slot.",
     },
     {
       title: "On-site diagnostic",
@@ -90,12 +91,14 @@ export const business = {
     },
     {
       title: "Fixed and wrapped up",
-      description: "The work gets done, the area gets cleaned, and you're back in service.",
+      description: "The work gets done, the area gets cleaned, and you are back in service.",
     },
   ],
   areas: [
-    { name: "Your city", note: "Home base" },
-    { name: "Nearby towns", note: "Regular service" },
+    { name: "Sterling", note: "Home base" },
+    { name: "Fort Morgan", note: "Regular service" },
+    { name: "Brush", note: "Regular service" },
+    { name: "Greeley", note: "Regular service" },
   ],
   reviews: [
     {
@@ -123,7 +126,7 @@ export const business = {
     {
       question: "How do you price drain cleaning?",
       answer:
-        "We diagnose first, then give a price before we start. Sample pricing only on this demo.",
+        "We diagnose first, then give a price before we start.",
     },
     {
       question: "Do you take emergency calls?",
