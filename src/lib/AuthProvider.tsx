@@ -16,10 +16,12 @@ type AuthContextValue = {
   user: User | null;
   role: UserRole;
   loading: boolean;
+  passwordRecovery: boolean;
   signIn: (
     email: string,
     password: string,
   ) => Promise<{ error: string | null }>;
+  updatePassword: (password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
 };
 
@@ -58,15 +60,28 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   const [session, setSession] = useState<Session | null>(null);
   const [role, setRole] = useState<UserRole>(null);
   const [loading, setLoading] = useState(true);
+  const [passwordRecovery, setPasswordRecovery] = useState(false);
 
   useEffect(() => {
     let mounted = true;
 
-    async function applySession(nextSession: Session | null) {
+    async function applySession(
+      nextSession: Session | null,
+      recovery = false,
+    ) {
       if (!nextSession) {
         if (!mounted) return;
         setSession(null);
         setRole(null);
+        setPasswordRecovery(false);
+        setLoading(false);
+        return;
+      }
+
+      if (recovery) {
+        if (!mounted) return;
+        setSession(nextSession);
+        setPasswordRecovery(true);
         setLoading(false);
         return;
       }
@@ -76,22 +91,32 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       if (nextRole !== "admin") {
         setSession(null);
         setRole(null);
+        setPasswordRecovery(false);
         setLoading(false);
         await supabase.auth.signOut({ scope: "local" });
         return;
       }
       setSession(nextSession);
       setRole(nextRole);
+      setPasswordRecovery(false);
       setLoading(false);
     }
 
     void supabase.auth.getSession().then(({ data }) => {
-      void applySession(data.session);
+      const hash = window.location.hash;
+      const recovery = hash.includes("type=recovery");
+      void applySession(data.session, recovery);
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange(
       (event, nextSession) => {
         if (event === "INITIAL_SESSION") return;
+        if (event === "PASSWORD_RECOVERY") {
+          window.setTimeout(() => {
+            void applySession(nextSession, true);
+          }, 0);
+          return;
+        }
         if (event === "TOKEN_REFRESHED") {
           setSession(nextSession);
           return;
@@ -115,6 +140,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       user: session?.user ?? null,
       role,
       loading,
+      passwordRecovery,
       signIn: async (email, password) => {
         const { data, error } = await supabase.auth.signInWithPassword({
           email: email.trim(),
@@ -134,14 +160,22 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         }
         setSession(data.session);
         setRole(nextRole);
+        setPasswordRecovery(false);
         setLoading(false);
         void logAuthEvent("auth.login", data.user.id);
+        return { error: null };
+      },
+      updatePassword: async (password) => {
+        const { error } = await supabase.auth.updateUser({ password });
+        if (error) return { error: error.message };
+        setPasswordRecovery(false);
         return { error: null };
       },
       signOut: async () => {
         const userId = session?.user.id;
         setSession(null);
         setRole(null);
+        setPasswordRecovery(false);
         setLoading(false);
         await supabase.auth.signOut({ scope: "local" });
         if (userId) {
@@ -149,7 +183,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         }
       },
     }),
-    [loading, role, session],
+    [loading, passwordRecovery, role, session],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

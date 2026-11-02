@@ -27,7 +27,9 @@ import { BookPage } from "../pages/BookPage";
 import { ConfirmationPage } from "../pages/ConfirmationPage";
 import { ContactPage } from "../pages/ContactPage";
 import { HomePage } from "../pages/HomePage";
+import { ForgotPasswordPage } from "../pages/ForgotPasswordPage";
 import { LoginPage } from "../pages/LoginPage";
+import { ResetPasswordPage } from "../pages/ResetPasswordPage";
 import { UnauthorizedPage } from "../pages/UnauthorizedPage";
 import { ManageBookingPage } from "../pages/ManageBookingPage";
 import { RescheduleBookingPage } from "../pages/RescheduleBookingPage";
@@ -41,6 +43,8 @@ export function App(): JSX.Element {
         <Toaster position="top-left" richColors closeButton />
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/unauthorized" element={<UnauthorizedPage />} />
           <Route
             path="/admin"
