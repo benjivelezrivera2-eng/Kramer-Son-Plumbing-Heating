@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import { Link } from "react-router-dom";
+import { CallButton } from "../components/CallButton";
 import { business } from "../config/business";
 
 export function HeroSection(): JSX.Element {
@@ -13,18 +14,15 @@ export function HeroSection(): JSX.Element {
           {business.hero.body}
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <a
-            href={business.phoneHref}
-            className="inline-flex h-12 items-center gap-2 rounded-md bg-[#c9a04a] px-5 text-sm font-semibold text-[#142033] hover:bg-[#b8903f] sm:px-6"
-          >
+          <CallButton className="inline-flex h-12 items-center gap-2 rounded-md bg-[#c9a04a] px-5 text-sm font-semibold text-[#142033] hover:bg-[#b8903f] sm:px-6">
             <Phone className="h-4 w-4" aria-hidden="true" />
             Call now
-          </a>
+          </CallButton>
           <Link
-            to="/contact"
+            to="/book"
             className="inline-flex h-12 items-center rounded-md border border-[#142033] px-5 text-sm font-semibold text-[#142033] hover:bg-[#142033]/5 sm:px-6"
           >
-            Request service
+            Book a visit
           </Link>
         </div>
       </div>

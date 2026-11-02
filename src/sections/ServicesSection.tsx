@@ -7,10 +7,13 @@ import {
   Settings,
   Wrench,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { business } from "../config/business";
+import { slugify, type ServiceType } from "../lib/shop";
+import { supabase } from "../lib/supabase";
 
-const serviceIcons = {
+const serviceIcons: Record<string, typeof Droplets> = {
   "Drain Cleaning": Droplets,
   "Sewer Line Repair": Wrench,
   "Water Heater Repair": Flame,
@@ -19,7 +22,11 @@ const serviceIcons = {
   "Pipe & Water Line Repair": Wrench,
   "Toilet & Fixture Repair": Bath,
   "Furnace & Heating Repair": Flame,
-} as const;
+  "AC Repair": Flame,
+  "Emergency / after-hours": Flame,
+};
+
+type Card = { title: string; description: string; slug: string };
 
 type ServicesSectionProps = {
   limit?: number;
@@ -30,7 +37,29 @@ export function ServicesSection({
   limit,
   showCommercial = true,
 }: ServicesSectionProps): JSX.Element {
-  const items = limit ? business.services.slice(0, limit) : business.services;
+  const fallback: Card[] = business.services.map((service) => ({
+    ...service,
+    slug: slugify(service.title),
+  }));
+  const [items, setItems] = useState<Card[]>(fallback);
+
+  useEffect(() => {
+    let mounted = true;
+    supabase
+      .from("service_types")
+      .select("slug, title, description")
+      .eq("is_active", true)
+      .order("sort_order")
+      .then(({ data }) => {
+        if (!mounted || !data?.length) return;
+        setItems(data as Card[]);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const shown = limit ? items.slice(0, limit) : items;
 
   return (
     <section className="flex w-full flex-col gap-10 bg-white px-4 py-16 sm:px-8 lg:px-16 lg:py-20">
@@ -55,21 +84,22 @@ export function ServicesSection({
       </header>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((service) => {
-          const Icon = serviceIcons[service.title];
+        {shown.map((service) => {
+          const Icon = serviceIcons[service.title] ?? Wrench;
           return (
-            <article
-              key={service.title}
-              className="flex flex-col gap-3 border border-slate-200 bg-[#f4f6f8] p-5"
+            <Link
+              key={service.slug}
+              to={`/services/${service.slug}`}
+              className="flex flex-col gap-3 border border-slate-200 bg-[#f4f6f8] p-5 hover:border-[#2a7a78]"
             >
-              {Icon ? <Icon className="h-8 w-8 text-[#2a7a78]" /> : null}
+              <Icon className="h-8 w-8 text-[#2a7a78]" />
               <h3 className="[font-family:'Gabarito',Helvetica] text-lg font-bold text-[#142033]">
                 {service.title}
               </h3>
               <p className="[font-family:'Geist',Helvetica] text-sm leading-6 text-slate-700">
                 {service.description}
               </p>
-            </article>
+            </Link>
           );
         })}
       </div>

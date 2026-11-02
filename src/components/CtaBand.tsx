@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { CallButton } from "./CallButton";
 import { business } from "../config/business";
 
 export function CtaBand(): JSX.Element {
@@ -15,12 +16,9 @@ export function CtaBand(): JSX.Element {
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <a
-            href={business.phoneHref}
-            className="inline-flex h-11 items-center justify-center rounded-md bg-[#c9a04a] px-5 text-sm font-semibold text-[#142033] hover:bg-[#b8903f]"
-          >
+          <CallButton className="inline-flex h-11 items-center justify-center rounded-md bg-[#c9a04a] px-5 text-sm font-semibold text-[#142033] hover:bg-[#b8903f]">
             Call {business.phoneDisplay}
-          </a>
+          </CallButton>
           <Link
             to="/contact"
             className="inline-flex h-11 items-center justify-center rounded-md border border-white/30 px-5 text-sm font-semibold text-white hover:bg-white/10"

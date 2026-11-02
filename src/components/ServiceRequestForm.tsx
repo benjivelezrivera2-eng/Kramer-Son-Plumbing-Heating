@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { business } from "../config/business";
+import { supabase } from "../lib/supabase";
 
 type FormState = {
   name: string;
   phone: string;
+  email: string;
   city: string;
   description: string;
 };
@@ -12,6 +15,7 @@ type FormState = {
 const initialForm: FormState = {
   name: "",
   phone: "",
+  email: "",
   city: "",
   description: "",
 };
@@ -19,18 +23,49 @@ const initialForm: FormState = {
 const fieldClassName =
   "h-11 rounded-md border border-slate-300 bg-white px-3 text-sm text-[#142033] outline-none focus-visible:border-[#2a7a78] focus-visible:ring-2 focus-visible:ring-[#2a7a78]";
 
+function isEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 export function ServiceRequestForm(): JSX.Element {
   const navigate = useNavigate();
   const [form, setForm] = useState<FormState>(initialForm);
-  const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
+  const [errors, setErrors] = useState<{
+    name?: string;
+    phone?: string;
+    email?: string;
+  }>({});
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const nextErrors: { name?: string; phone?: string } = {};
+    const nextErrors: { name?: string; phone?: string; email?: string } = {};
     if (!form.name.trim()) nextErrors.name = "Name is required";
     if (!form.phone.trim()) nextErrors.phone = "Phone is required";
+    if (!form.email.trim() || !isEmail(form.email.trim())) {
+      nextErrors.email = "A valid email is required";
+    }
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
+
+    setSubmitting(true);
+    const { data, error } = await supabase.functions.invoke("create-lead", {
+      body: {
+        source: "contact_form",
+        name: form.name.trim(),
+        phone: form.phone.trim(),
+        email: form.email.trim(),
+        city: form.city.trim(),
+        description: form.description.trim(),
+      },
+    });
+    setSubmitting(false);
+
+    if (error || !data?.lead_id) {
+      toast.error("We could not send that. Check the fields and try again.");
+      return;
+    }
+
     navigate("/confirmation");
   };
 
@@ -80,6 +115,28 @@ export function ServiceRequestForm(): JSX.Element {
 
       <div className="flex flex-col gap-1.5">
         <label
+          htmlFor="sr-email"
+          className="[font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]"
+        >
+          Email <span className="text-red-600">*</span>
+        </label>
+        <input
+          id="sr-email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          value={form.email}
+          onChange={(event) => setForm({ ...form, email: event.target.value })}
+          className={fieldClassName}
+          placeholder="you@email.com"
+        />
+        {errors.email && (
+          <span className="text-xs text-red-600">{errors.email}</span>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <label
           htmlFor="sr-city"
           className="[font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]"
         >
@@ -120,9 +177,10 @@ export function ServiceRequestForm(): JSX.Element {
 
       <button
         type="submit"
-        className="mt-1 h-11 rounded-md bg-[#c9a04a] px-6 text-sm font-semibold text-[#142033] transition-colors hover:bg-[#b8903f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#142033] focus-visible:ring-offset-2"
+        disabled={submitting}
+        className="mt-1 h-11 rounded-md bg-[#c9a04a] px-6 text-sm font-semibold text-[#142033] transition-colors hover:bg-[#b8903f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#142033] focus-visible:ring-offset-2 disabled:opacity-60"
       >
-        Send request
+        {submitting ? "Sending…" : "Send request"}
       </button>
     </form>
   );

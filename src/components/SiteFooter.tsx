@@ -1,9 +1,11 @@
 import { Phone } from "lucide-react";
 import { Link } from "react-router-dom";
+import { CallButton } from "./CallButton";
 import { business } from "../config/business";
 
 const footerLinks = [
   { label: "Services", to: "/services" },
+  { label: "Book", to: "/book" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
 ];
@@ -49,19 +51,16 @@ export function SiteFooter(): JSX.Element {
           </p>
           <address className="mt-4 flex flex-col gap-2 not-italic [font-family:'Geist',Helvetica] text-sm text-slate-200">
             <p>{business.city}</p>
-            <a href={business.phoneHref} className="hover:text-white">
+            <CallButton className="hover:text-white">
               {business.phoneDisplay}
-            </a>
+            </CallButton>
             <p>{business.hours}</p>
           </address>
           <div className="mt-5 flex flex-col gap-2 sm:flex-row">
-            <a
-              href={business.phoneHref}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-[#c9a04a] px-4 text-sm font-semibold text-[#142033] hover:bg-[#b8903f]"
-            >
+            <CallButton className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-[#c9a04a] px-4 text-sm font-semibold text-[#142033] hover:bg-[#b8903f]">
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call now
-            </a>
+            </CallButton>
             <Link
               to="/contact"
               className="inline-flex h-11 items-center justify-center rounded-md border border-[#c9a04a] px-4 text-sm font-semibold text-[#c9a04a] hover:bg-white/5"
