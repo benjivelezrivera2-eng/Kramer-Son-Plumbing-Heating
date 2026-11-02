@@ -23,10 +23,11 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
 
 export function SiteHeader(): JSX.Element {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { session } = useAuth();
-  const officeLink = session
-    ? { label: "Office", to: "/admin" }
-    : { label: "Shop login", to: "/login" };
+  const { role } = useAuth();
+  const officeLink =
+    role === "admin"
+      ? { label: "Office", to: "/admin" }
+      : { label: "Shop login", to: "/login" };
   const links = [...navItems, officeLink];
 
   return (

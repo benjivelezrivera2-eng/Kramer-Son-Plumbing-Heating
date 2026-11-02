@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { business } from "../config/business";
 import { useAuth } from "../lib/AuthProvider";
@@ -10,7 +10,8 @@ const fieldClassName =
 
 export function LoginPage(): JSX.Element {
   usePageTitle("Shop login");
-  const { session, loading, signIn } = useAuth();
+  const { session, role, loading, signIn } = useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
   const from =
     (location.state as { from?: string } | null)?.from ?? "/admin";
@@ -19,8 +20,8 @@ export function LoginPage(): JSX.Element {
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  if (!loading && session) {
-    return <Navigate to={from} replace />;
+  if (!loading && session && role === "admin") {
+    return <Navigate to={from.startsWith("/admin") ? from : "/admin"} replace />;
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -28,6 +29,10 @@ export function LoginPage(): JSX.Element {
     setSubmitting(true);
     const { error } = await signIn(email, password);
     setSubmitting(false);
+    if (error === "access_denied") {
+      navigate("/unauthorized", { replace: true });
+      return;
+    }
     if (error) {
       toast.error("That login did not work. Check the email and password.");
       return;

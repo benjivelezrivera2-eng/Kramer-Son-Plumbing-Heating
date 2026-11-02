@@ -6,7 +6,7 @@ export function RequireAdmin({
 }: {
   children: JSX.Element;
 }): JSX.Element {
-  const { session, loading } = useAuth();
+  const { session, role, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
@@ -20,6 +20,18 @@ export function RequireAdmin({
   if (!session) {
     return (
       <Navigate to="/login" replace state={{ from: location.pathname }} />
+    );
+  }
+
+  if (role === "user" || role === "client") {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  if (role !== "admin") {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#f4f6f8] [font-family:'Geist',Helvetica] text-sm text-slate-600">
+        Checking login…
+      </div>
     );
   }
 
