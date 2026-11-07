@@ -9,11 +9,12 @@ export function CtaBand(): JSX.Element {
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
         <div>
           <h2 className="[font-family:'Gabarito',Helvetica] text-2xl font-extrabold text-white sm:text-3xl">
-            Need someone out today?
+            Leak, clog, or no heat?
           </h2>
           <p className="mt-2 max-w-xl [font-family:'Geist',Helvetica] text-sm leading-6 text-slate-300">
-            Call, or book a morning or afternoon window. We take plumbing and
-            heating jobs in {business.city} and the towns around it.
+            Call the shop, or book a morning or afternoon window. We take
+            plumbing and heating jobs in {business.city} and the towns around
+            it.
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
@@ -28,7 +29,7 @@ export function CtaBand(): JSX.Element {
             variant="outline"
             className="h-11 border-white/30 bg-transparent [font-family:'Geist',Helvetica] text-sm font-semibold text-white hover:bg-white/10 hover:text-white"
           >
-            <Link to="/book">Book a visit</Link>
+            <Link to="/book">Book a window</Link>
           </Button>
         </div>
       </div>

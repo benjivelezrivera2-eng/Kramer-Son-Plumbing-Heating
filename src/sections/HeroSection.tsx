@@ -29,7 +29,7 @@ export function HeroSection(): JSX.Element {
           >
             <CallButton>
               <Phone className="h-4 w-4" aria-hidden="true" />
-              Call now
+              Call Kramer & Son
             </CallButton>
           </Button>
           <Button
@@ -38,7 +38,7 @@ export function HeroSection(): JSX.Element {
             size="lg"
             className="h-12 border-[#142033] [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033] hover:bg-[#142033]/5"
           >
-            <Link to="/book">Book a visit</Link>
+            <Link to="/book">Book a window</Link>
           </Button>
         </div>
       </div>

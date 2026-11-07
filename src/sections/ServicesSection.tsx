@@ -46,7 +46,7 @@ export function ServicesSection({
       <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h2 className="[font-family:'Gabarito',Helvetica] text-[28px] font-extrabold text-[#142033] sm:text-[36px]">
-            {business.niche} services
+            What we fix
           </h2>
           <p className="mt-2 max-w-xl [font-family:'Geist',Helvetica] text-sm leading-6 text-slate-600">
             The common calls. If it is plumbing or heat, we will tell you what

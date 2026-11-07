@@ -4,17 +4,17 @@ import { business } from "../config/business";
 const items = [
   {
     icon: MapPin,
-    label: "Service area",
+    label: "We come to",
     value: business.proposalNote,
   },
   {
     icon: Clock,
-    label: "Hours",
+    label: "When we’re out",
     value: business.hours,
   },
   {
     icon: ShieldCheck,
-    label: "Pricing",
+    label: "Price before we start",
     value: "Written price before work starts",
   },
 ] as const;
