@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { Card, CardContent } from "../components/ui/card";
 import { business } from "../config/business";
 
 export function ReviewsSection(): JSX.Element {
@@ -12,30 +13,32 @@ export function ReviewsSection(): JSX.Element {
       </p>
       <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3">
         {business.reviews.map((review) => (
-          <figure
+          <Card
             key={review.name}
-            className="flex flex-col gap-4 border border-slate-200 bg-[#f4f6f8] p-6"
+            className="rounded-none border-slate-200 bg-[#f4f6f8] shadow-none"
           >
-            <div
-              className="flex gap-0.5"
-              role="img"
-              aria-label="5 out of 5"
-            >
-              {Array.from({ length: 5 }).map((_, index) => (
-                <Star
-                  key={index}
-                  aria-hidden="true"
-                  className="h-4 w-4 fill-[#c9a04a] text-[#c9a04a]"
-                />
-              ))}
-            </div>
-            <blockquote className="[font-family:'Geist',Helvetica] text-sm leading-6 text-slate-700">
-              {review.quote}
-            </blockquote>
-            <figcaption className="mt-auto [font-family:'Gabarito',Helvetica] text-sm font-bold text-[#142033]">
-              {review.name}
-            </figcaption>
-          </figure>
+            <CardContent className="flex h-full flex-col gap-4 p-6">
+              <div
+                className="flex gap-0.5"
+                role="img"
+                aria-label="5 out of 5"
+              >
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Star
+                    key={index}
+                    aria-hidden="true"
+                    className="h-4 w-4 fill-[#c9a04a] text-[#c9a04a]"
+                  />
+                ))}
+              </div>
+              <blockquote className="[font-family:'Geist',Helvetica] text-sm leading-6 text-slate-700">
+                {review.quote}
+              </blockquote>
+              <p className="mt-auto [font-family:'Gabarito',Helvetica] text-sm font-bold text-[#142033]">
+                {review.name}
+              </p>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </section>

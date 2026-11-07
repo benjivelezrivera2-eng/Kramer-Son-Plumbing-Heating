@@ -1,12 +1,20 @@
 import { Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { CallButton } from "../components/CallButton";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
 import { business } from "../config/business";
 
 export function HeroSection(): JSX.Element {
   return (
     <section className="flex w-full flex-col gap-10 bg-[#f4f6f8] px-4 py-12 sm:px-8 sm:py-16 lg:flex-row lg:items-center lg:gap-16 lg:px-16 lg:py-20">
       <div className="flex min-w-0 flex-1 flex-col items-start gap-6">
+        <Badge
+          variant="secondary"
+          className="border border-[#2a7a78]/25 bg-[#2a7a78]/10 [font-family:'Geist',Helvetica] font-medium text-[#2a7a78]"
+        >
+          Same-day windows when we can
+        </Badge>
         <h1 className="max-w-xl [font-family:'Gabarito',Helvetica] text-[34px] font-extrabold leading-[1.15] text-[#142033] sm:text-[46px] lg:text-[54px]">
           {business.hero.headline}
         </h1>
@@ -14,16 +22,24 @@ export function HeroSection(): JSX.Element {
           {business.hero.body}
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <CallButton className="inline-flex h-12 items-center gap-2 rounded-md bg-[#c9a04a] px-5 text-sm font-semibold text-[#142033] hover:bg-[#b8903f] sm:px-6">
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            Call now
-          </CallButton>
-          <Link
-            to="/book"
-            className="inline-flex h-12 items-center rounded-md border border-[#142033] px-5 text-sm font-semibold text-[#142033] hover:bg-[#142033]/5 sm:px-6"
+          <Button
+            asChild
+            size="lg"
+            className="h-12 [font-family:'Geist',Helvetica] text-sm font-semibold"
           >
-            Book a visit
-          </Link>
+            <CallButton>
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call now
+            </CallButton>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="h-12 border-[#142033] [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033] hover:bg-[#142033]/5"
+          >
+            <Link to="/book">Book a visit</Link>
+          </Button>
         </div>
       </div>
       <img

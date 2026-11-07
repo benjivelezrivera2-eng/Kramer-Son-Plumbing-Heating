@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CallButton } from "./CallButton";
+import { Button } from "./ui/button";
 import { business } from "../config/business";
 
 export function CtaBand(): JSX.Element {
@@ -16,15 +17,19 @@ export function CtaBand(): JSX.Element {
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <CallButton className="inline-flex h-11 items-center justify-center rounded-md bg-[#c9a04a] px-5 text-sm font-semibold text-[#142033] hover:bg-[#b8903f]">
-            Call {business.phoneDisplay}
-          </CallButton>
-          <Link
-            to="/book"
-            className="inline-flex h-11 items-center justify-center rounded-md border border-white/30 px-5 text-sm font-semibold text-white hover:bg-white/10"
+          <Button
+            asChild
+            className="h-11 [font-family:'Geist',Helvetica] text-sm font-semibold"
           >
-            Book a visit
-          </Link>
+            <CallButton>Call {business.phoneDisplay}</CallButton>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            className="h-11 border-white/30 bg-transparent [font-family:'Geist',Helvetica] text-sm font-semibold text-white hover:bg-white/10 hover:text-white"
+          >
+            <Link to="/book">Book a visit</Link>
+          </Button>
         </div>
       </div>
     </section>
