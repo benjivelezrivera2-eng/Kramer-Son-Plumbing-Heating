@@ -42,7 +42,10 @@ export function ServicesSection({
   const shown = limit ? items.slice(0, limit) : items;
 
   return (
-    <section className="flex w-full flex-col gap-10 bg-white px-4 py-16 sm:px-8 lg:px-16 lg:py-20">
+    <section
+      id={limit ? undefined : "services"}
+      className="scroll-mt-24 flex w-full flex-col gap-10 bg-white px-4 py-16 sm:px-8 lg:px-16 lg:py-20"
+    >
       <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h2 className="[font-family:'Gabarito',Helvetica] text-[28px] font-extrabold text-[#142033] sm:text-[36px]">
@@ -55,7 +58,7 @@ export function ServicesSection({
         </div>
         {limit ? (
           <Link
-            to="/services"
+            to="/#services"
             className="[font-family:'Geist',Helvetica] text-sm font-semibold text-[#2a7a78] hover:underline"
           >
             See all services
@@ -98,7 +101,7 @@ export function ServicesSection({
             </div>
           </div>
           <Link
-            to="/contact"
+            to="/#contact"
             className="inline-flex h-11 shrink-0 items-center rounded-md bg-[#c9a04a] px-5 text-sm font-semibold text-[#142033] hover:bg-[#b8903f]"
           >
             Ask about commercial

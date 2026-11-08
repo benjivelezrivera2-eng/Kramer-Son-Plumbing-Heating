@@ -4,10 +4,10 @@ import { CallButton } from "./CallButton";
 import { business } from "../config/business";
 
 const footerLinks = [
-  { label: "Services", to: "/services" },
-  { label: "Book", to: "/book" },
-  { label: "About", to: "/about" },
-  { label: "Contact", to: "/contact" },
+  { label: "Services", to: "/#services" },
+  { label: "Book", to: "/#book" },
+  { label: "About", to: "/#about" },
+  { label: "Contact", to: "/#contact" },
   { label: "Shop login", to: "/login" },
 ];
 
@@ -63,7 +63,7 @@ export function SiteFooter(): JSX.Element {
               Call now
             </CallButton>
             <Link
-              to="/contact"
+              to="/#contact"
               className="inline-flex h-11 items-center justify-center rounded-md border border-[#c9a04a] px-4 text-sm font-semibold text-[#c9a04a] hover:bg-white/5"
             >
               Request service

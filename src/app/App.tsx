@@ -4,7 +4,6 @@ import { RequireAdmin } from "../components/RequireAdmin";
 import { AdminShell } from "../layouts/AdminShell";
 import { SiteShell } from "../layouts/SiteShell";
 import { AuthProvider } from "../lib/AuthProvider";
-import { AboutPage } from "../pages/AboutPage";
 import { AdminActivityPage } from "../pages/admin/AdminActivityPage";
 import { AdminAvailabilityPage } from "../pages/admin/AdminAvailabilityPage";
 import { AdminBookingDetailPage } from "../pages/admin/AdminBookingDetailPage";
@@ -25,7 +24,6 @@ import { AdminTechnicianDetailPage } from "../pages/admin/AdminTechnicianDetailP
 import { AdminTechniciansPage } from "../pages/admin/AdminTechniciansPage";
 import { BookPage } from "../pages/BookPage";
 import { ConfirmationPage } from "../pages/ConfirmationPage";
-import { ContactPage } from "../pages/ContactPage";
 import { HomePage } from "../pages/HomePage";
 import { ForgotPasswordPage } from "../pages/ForgotPasswordPage";
 import { LoginPage } from "../pages/LoginPage";
@@ -34,7 +32,6 @@ import { UnauthorizedPage } from "../pages/UnauthorizedPage";
 import { ManageBookingPage } from "../pages/ManageBookingPage";
 import { RescheduleBookingPage } from "../pages/RescheduleBookingPage";
 import { ServiceDetailPage } from "../pages/ServiceDetailPage";
-import { ServicesPage } from "../pages/ServicesPage";
 
 export function App(): JSX.Element {
   return (
@@ -75,12 +72,24 @@ export function App(): JSX.Element {
           </Route>
           <Route element={<SiteShell />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<ServicesPage />} />
+            <Route
+              path="/services"
+              element={<Navigate to={{ pathname: "/", hash: "services" }} replace />}
+            />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
-            <Route path="/book" element={<BookPage />} />
+            <Route
+              path="/book"
+              element={<Navigate to={{ pathname: "/", hash: "book" }} replace />}
+            />
             <Route path="/book/:slug" element={<BookPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route
+              path="/about"
+              element={<Navigate to={{ pathname: "/", hash: "about" }} replace />}
+            />
+            <Route
+              path="/contact"
+              element={<Navigate to={{ pathname: "/", hash: "contact" }} replace />}
+            />
             <Route path="/confirmation" element={<ConfirmationPage />} />
             <Route path="/b/:token" element={<ManageBookingPage />} />
             <Route path="/b/:token/reschedule" element={<RescheduleBookingPage />} />

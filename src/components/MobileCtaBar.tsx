@@ -19,7 +19,7 @@ export function MobileCtaBar(): JSX.Element {
           variant="outline"
           className="h-12 flex-1 border-[#142033] [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]"
         >
-          <Link to="/book">
+          <Link to="/#book">
             <CalendarDays className="h-4 w-4" aria-hidden="true" />
             Book
           </Link>

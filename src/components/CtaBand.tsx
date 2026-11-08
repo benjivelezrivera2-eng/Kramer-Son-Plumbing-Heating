@@ -29,7 +29,7 @@ export function CtaBand(): JSX.Element {
             variant="outline"
             className="h-11 border-white/30 bg-transparent [font-family:'Geist',Helvetica] text-sm font-semibold text-white hover:bg-white/10 hover:text-white"
           >
-            <Link to="/book">Book a window</Link>
+            <Link to="/#book">Book a window</Link>
           </Button>
         </div>
       </div>
