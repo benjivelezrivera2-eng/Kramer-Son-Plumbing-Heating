@@ -58,8 +58,7 @@ export function LoginPage(): JSX.Element {
           Shop login
         </h1>
         <p className="mt-2 [font-family:'Geist',Helvetica] text-sm leading-6 text-slate-600">
-          Office only. There is no customer account and no sign-up on this
-          page.
+          Office only. Homeowners do not get an account.
         </p>
 
         <form
@@ -110,6 +109,12 @@ export function LoginPage(): JSX.Element {
           >
             {submitting ? "Signing in…" : "Sign in"}
           </button>
+          <Link
+            to="/forgot-password"
+            className="text-center [font-family:'Geist',Helvetica] text-sm font-medium text-[#2a7a78] hover:text-[#1f5c5b]"
+          >
+            Forgot password
+          </Link>
         </form>
       </main>
     </div>

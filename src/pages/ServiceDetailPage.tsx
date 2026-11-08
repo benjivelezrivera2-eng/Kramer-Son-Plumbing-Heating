@@ -16,7 +16,7 @@ export function ServiceDetailPage(): JSX.Element {
         <h1 className="[font-family:'Gabarito',Helvetica] text-[32px] font-extrabold text-[#142033]">
           Service not found
         </h1>
-        <Link to="/services" className="mt-4 inline-flex text-sm font-semibold text-[#2a7a78]">
+        <Link to="/#services" className="mt-4 inline-flex text-sm font-semibold text-[#2a7a78]">
           Back to services
         </Link>
       </section>
@@ -35,7 +35,7 @@ export function ServiceDetailPage(): JSX.Element {
         <Link to={`/book/${slugify(service.title)}`} className={primaryButtonClassName}>
           Book this
         </Link>
-        <Link to="/contact" className={secondaryButtonClassName}>
+        <Link to="/#contact" className={secondaryButtonClassName}>
           Request service
         </Link>
         <CallButton className={secondaryButtonClassName}>

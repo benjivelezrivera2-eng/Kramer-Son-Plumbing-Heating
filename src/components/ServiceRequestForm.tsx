@@ -44,7 +44,7 @@ export function ServiceRequestForm(): JSX.Element {
     }
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
-    navigate("/book");
+    navigate({ pathname: "/", hash: "book" });
   };
 
   return (

@@ -4,7 +4,7 @@ export function ProcessSection(): JSX.Element {
   return (
     <section className="bg-white px-4 py-16 sm:px-8 lg:px-16 lg:py-20">
       <h2 className="[font-family:'Gabarito',Helvetica] text-[28px] font-extrabold text-[#142033] sm:text-[36px]">
-        How a visit works
+        What happens after you call
       </h2>
       <ol className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
         {business.process.map((step, index) => (
