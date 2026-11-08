@@ -12,8 +12,8 @@ export const business = {
   hours: "Weekdays 8–5, plus after-hours emergencies",
   proposalNote: "Sterling, Fort Morgan, Brush, and Greeley",
   hero: {
-    headline: "The plumber who actually shows up",
-    body: "Drains, water heaters, leaks, and no-heat calls. Book a morning or afternoon window, or call if it cannot wait.",
+    headline: "Plumbing and heating for Sterling homes",
+    body: "We cover Sterling, Fort Morgan, Brush, and Greeley. Drains, water heaters, leaks, and no-heat calls — book a morning or afternoon window, or call if it can’t wait.",
     imageAlt: "Technician working on a home plumbing and heating job",
   },
   services: [
@@ -82,16 +82,16 @@ export const business = {
   ],
   process: [
     {
-      title: "Call or book a window",
-      description: "Tell us what is going on. Pick a morning or afternoon slot.",
+      title: "You call or book a window",
+      description: "Tell us what’s going on. Pick a morning or afternoon slot.",
     },
     {
-      title: "On-site diagnostic",
-      description: "We inspect, explain the options, and give a written price.",
+      title: "We look it over and price it",
+      description: "On site we explain the options and give you a written price before work starts.",
     },
     {
-      title: "Fixed and wrapped up",
-      description: "The work gets done, the area gets cleaned, and you are back in service.",
+      title: "We fix it and clean up",
+      description: "The job gets done, the area gets cleaned, and you’re back in service.",
     },
   ],
   areas: [

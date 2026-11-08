@@ -7,7 +7,7 @@ export function ReasonsSection(): JSX.Element {
   return (
     <section className="bg-[#f4f6f8] px-4 py-16 sm:px-8 lg:px-16 lg:py-20">
       <h2 className="[font-family:'Gabarito',Helvetica] text-[28px] font-extrabold text-[#142033] sm:text-[36px]">
-        Why people call
+        Why homeowners call us
       </h2>
       <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {business.reasons.map((reason, index) => {
