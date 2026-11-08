@@ -1,9 +1,9 @@
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { business } from "../config/business";
 import { useAuth } from "../lib/AuthProvider";
-import { CallButton } from "./CallButton";
+import { Button } from "./ui/button";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -55,18 +55,14 @@ export function SiteHeader(): JSX.Element {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          <CallButton
-            ariaLabel={`Call ${business.phoneDisplay}`}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-md bg-[#c9a04a] text-[#142033] md:hidden"
+          <Button
+            asChild
+            className="h-11 [font-family:'Geist',Helvetica] text-sm font-semibold"
           >
-            <Phone className="h-5 w-5" aria-hidden="true" />
-          </CallButton>
-          <CallButton className="hidden h-11 items-center gap-2 rounded-md bg-[#c9a04a] px-4 text-[#142033] transition-colors hover:bg-[#b8903f] md:inline-flex">
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            <span className="[font-family:'Geist',Helvetica] text-sm font-semibold">
-              {business.phoneDisplay}
-            </span>
-          </CallButton>
+            <Link to="/book" onClick={() => setMenuOpen(false)}>
+              Book a service
+            </Link>
+          </Button>
           <button
             type="button"
             aria-label="Toggle menu"
