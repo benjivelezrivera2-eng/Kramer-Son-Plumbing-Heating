@@ -13,12 +13,15 @@ type ProfileMenuProps = {
   /** Sidebar uses `up`; header uses `down`. */
   placement?: "up" | "down";
   onNavigate?: () => void;
+  /** The top-right header picture hides the name. The sidebar keeps it. */
+  showName?: boolean;
 };
 
 export function ProfileMenu({
   tone,
   placement = "up",
   onNavigate,
+  showName = true,
 }: ProfileMenuProps): JSX.Element {
   const { user, profile, signOut } = useAuth();
   const navigate = useNavigate();
@@ -60,9 +63,11 @@ export function ProfileMenu({
   }, []);
 
   const dark = tone === "dark";
-  const buttonClass = dark
-    ? "flex w-full items-center gap-2 rounded-md px-1 py-1.5 text-left hover:bg-white/5"
-    : "flex w-full items-center gap-2 rounded-md px-1 py-1.5 text-left hover:bg-slate-50";
+  const buttonClass = !showName
+    ? "flex h-11 w-11 items-center justify-center rounded-full hover:bg-slate-50"
+    : dark
+      ? "flex w-full items-center gap-2 rounded-md px-1 py-1.5 text-left hover:bg-white/5"
+      : "flex w-full items-center gap-2 rounded-md px-1 py-1.5 text-left hover:bg-slate-50";
   const nameClass = dark
     ? "truncate [font-family:'Geist',Helvetica] text-sm font-semibold text-white"
     : "truncate [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]";
@@ -70,8 +75,9 @@ export function ProfileMenu({
     ? "truncate [font-family:'Geist',Helvetica] text-xs text-slate-400"
     : "truncate [font-family:'Geist',Helvetica] text-xs text-slate-500";
   const chevronClass = dark ? "h-4 w-4 shrink-0 text-slate-400" : "h-4 w-4 shrink-0 text-slate-500";
-  const menuPosition =
-    placement === "down"
+  const menuPosition = !showName
+    ? "absolute right-0 top-full z-30 mt-2 w-56"
+    : placement === "down"
       ? "absolute left-0 right-0 top-full z-20 mt-2"
       : "absolute bottom-full left-0 right-0 z-20 mb-2";
   const menuClass = dark
@@ -89,16 +95,21 @@ export function ProfileMenu({
       <button
         type="button"
         className={buttonClass}
+        aria-label={showName ? undefined : triggerLabel}
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
       >
         <AvatarMark src={avatarUrl} initials={initials} />
-        <span className={`min-w-0 flex-1 ${nameClass}`}>{triggerLabel}</span>
-        <ChevronDown
-          className={`${chevronClass} transition-transform ${open ? "rotate-180" : ""}`}
-          aria-hidden
-        />
+        {showName && (
+          <>
+            <span className={`min-w-0 flex-1 ${nameClass}`}>{triggerLabel}</span>
+            <ChevronDown
+              className={`${chevronClass} transition-transform ${open ? "rotate-180" : ""}`}
+              aria-hidden
+            />
+          </>
+        )}
       </button>
       {open && (
         <div className={menuClass} role="menu">

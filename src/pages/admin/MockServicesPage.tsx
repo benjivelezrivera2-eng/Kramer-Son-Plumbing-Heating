@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { HoverMark, HoverTip, hoverLiftClass } from "../../components/admin/HoverTip";
 import { NoMatches, PageHeading, SkeletonRows, useMockReady } from "../../components/admin/MockBits";
 import { matchesQuery, mockServices, type OfficeContext } from "../../lib/adminMock";
 import { usePageTitle } from "../../lib/usePageTitle";
@@ -47,9 +48,11 @@ export function MockServicesPage(): JSX.Element {
         ) : (
           <ul className="grid gap-3 md:grid-cols-2">
             {rows.map((row) => (
-              <li key={row.id} className="rounded-xl border border-slate-200 bg-white p-5">
-                <p className="[font-family:'Geist',Helvetica] text-xs font-semibold tracking-wide text-[#2a7a78]">
+              <li key={row.id} className={`${hoverLiftClass} rounded-xl p-5`}>
+                <HoverTip text="Office starting price. Not shown on the public site." />
+                <p className="flex items-center gap-1.5 [font-family:'Geist',Helvetica] text-xs font-semibold tracking-wide text-[#2a7a78]">
                   {row.category}
+                  <HoverMark />
                 </p>
                 <div className="mt-1 flex items-baseline justify-between gap-3">
                   <h2 className="[font-family:'Gabarito',Helvetica] text-lg font-extrabold text-[#142033]">

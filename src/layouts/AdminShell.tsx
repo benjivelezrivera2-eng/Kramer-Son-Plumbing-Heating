@@ -4,13 +4,15 @@ import {
   Menu,
   PanelLeftClose,
   PanelLeftOpen,
+  Plus,
   Search,
   Users,
   Wrench,
   X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { toast } from "sonner";
 import { NotificationBell } from "../components/admin/NotificationBell";
 import { ProfileMenu } from "../components/ProfileMenu";
 import { Input } from "../components/ui/input";
@@ -82,10 +84,6 @@ export function AdminShell(): JSX.Element {
     setNotes((current) =>
       current.map((item) => (item.id === id ? { ...item, unread: false } : item)),
     );
-  }
-
-  function markAllRead() {
-    setNotes((current) => current.map((item) => ({ ...item, unread: false })));
   }
 
   function setVisitStatus(id: string, next: MockBookingStatus): void {
@@ -204,9 +202,10 @@ export function AdminShell(): JSX.Element {
                 className="pl-9"
               />
             </form>
-            <NotificationBell items={notes} onMarkRead={markRead} onMarkAllRead={markAllRead} />
-            <div className="hidden min-w-[12rem] max-w-xs lg:block">
-              <ProfileMenu tone="light" placement="down" />
+            <QuickActions />
+            <NotificationBell items={notes} onMarkRead={markRead} />
+            <div className="hidden lg:block">
+              <ProfileMenu tone="light" placement="down" showName={false} />
             </div>
             <button
               type="button"
@@ -258,6 +257,80 @@ export function AdminShell(): JSX.Element {
           <Outlet context={outletContext} />
         </main>
       </div>
+    </div>
+  );
+}
+
+const quickLinks = [
+  { label: "Services", to: "/admin/services" },
+  { label: "Team", to: "/admin/clients" },
+  { label: "Bookings", to: "/admin/bookings" },
+];
+
+function QuickActions(): JSX.Element {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handlePointer(event: MouseEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    }
+    function handleKey(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", handlePointer);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handlePointer);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, []);
+
+  const itemClass =
+    "flex h-11 w-full items-center px-3 text-left [font-family:'Geist',Helvetica] text-sm font-medium text-[#142033] hover:bg-slate-50";
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        className="flex h-11 w-11 items-center justify-center rounded-md border border-slate-200 text-[#142033] hover:bg-slate-50"
+        aria-label="Quick actions"
+        aria-expanded={open}
+        aria-haspopup="menu"
+        onClick={() => setOpen((value) => !value)}
+      >
+        <Plus className="h-5 w-5" aria-hidden />
+      </button>
+      {open && (
+        <div
+          role="menu"
+          aria-label="Quick actions"
+          className="absolute right-0 z-30 mt-2 w-44 overflow-hidden rounded-md border border-slate-200 bg-white shadow-lg"
+        >
+          <button
+            type="button"
+            role="menuitem"
+            className={itemClass}
+            onClick={() => {
+              setOpen(false);
+              toast("Sample only. A booking was not created.");
+            }}
+          >
+            New booking
+          </button>
+          {quickLinks.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              role="menuitem"
+              className={itemClass}
+              onClick={() => setOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

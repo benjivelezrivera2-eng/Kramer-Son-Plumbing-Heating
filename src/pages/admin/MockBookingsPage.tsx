@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { HoverMark, HoverTip, visitStatusTip } from "../../components/admin/HoverTip";
 import { NoMatches, PageHeading, SkeletonRows, useMockReady } from "../../components/admin/MockBits";
 import {
   inOfficeRange,
@@ -156,7 +157,7 @@ export function MockBookingsPage(): JSX.Element {
         ) : visible.length === 0 ? (
           <NoMatches query={query || `${status}, ${service}`} />
         ) : (
-          <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <div className="overflow-x-auto overflow-y-visible rounded-xl border border-slate-200 bg-white lg:overflow-visible">
             <table className="w-full min-w-[720px] border-separate border-spacing-0 text-left">
               <thead className="bg-slate-50">
                 <tr>
@@ -197,10 +198,14 @@ export function MockBookingsPage(): JSX.Element {
                         }
                       }}
                       tabIndex={0}
-                      className="cursor-pointer border-b border-slate-100 last:border-0 hover:bg-slate-50"
+                      className="group/hover relative cursor-pointer border-b border-slate-100 outline-transparent transition last:border-0 hover:z-20 hover:bg-white hover:outline hover:outline-2 hover:outline-[#2a7a78] hover:shadow-[0_10px_24px_rgba(20,32,51,0.12)]"
                     >
-                      <td className="border-b border-slate-100 px-4 py-4">
-                        <p className="[font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]">{row.client}</p>
+                      <td className="relative border-b border-slate-100 px-4 py-4">
+                        <HoverTip text={visitStatusTip(row.status)} />
+                        <p className="flex items-center gap-1.5 [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]">
+                          {row.client}
+                          <HoverMark />
+                        </p>
                       </td>
                       <td className="border-b border-slate-100 px-4 py-4">
                         <span className="inline-flex rounded-full bg-slate-100 px-2 py-1 [font-family:'Geist',Helvetica] text-xs font-semibold text-[#142033]">

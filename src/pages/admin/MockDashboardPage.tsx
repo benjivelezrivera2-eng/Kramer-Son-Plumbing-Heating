@@ -1,7 +1,7 @@
-import { Info } from "lucide-react";
 import { useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import { toast } from "sonner";
+import { HoverMark, HoverTip, hoverLiftClass, visitStatusTip } from "../../components/admin/HoverTip";
 import { NoMatches, PageHeading, SkeletonBlock, useMockReady } from "../../components/admin/MockBits";
 import {
   countOfficeCards,
@@ -134,12 +134,17 @@ export function MockDashboardPage(): JSX.Element {
         <div className="mt-4 grid gap-4 lg:grid-cols-2">
           {bookings.length > 0 && (
             <Panel title="Recent bookings">
-              <ul className="divide-y divide-slate-100">
+              <ul className="space-y-2 overflow-visible">
                 {bookings.map((row) => (
-                  <li key={row.id} className="flex items-center justify-between gap-3 py-3">
+                  <li
+                    key={row.id}
+                    className={`${hoverLiftClass} flex items-center justify-between gap-3 rounded-lg px-3 py-3`}
+                  >
+                    <HoverTip text={visitStatusTip(row.status)} />
                     <div>
-                      <p className="[font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]">
+                      <p className="flex items-center gap-1.5 [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]">
                         {row.client}
+                        <HoverMark />
                       </p>
                       <p className="[font-family:'Geist',Helvetica] text-xs text-slate-500">
                         {row.service} · {row.when} {row.window.toLowerCase()}
@@ -178,12 +183,20 @@ export function MockDashboardPage(): JSX.Element {
                 Nothing in this view. Admin actions are confirms, pending marks, cancellations, and service changes. Client bookings are requests that came in from the site.
               </p>
             ) : (
-              <ul className="divide-y divide-slate-100">
+              <ul className="space-y-2 overflow-visible">
                 {activity.map((row) => (
-                  <li key={row.id} className="py-3">
+                  <li key={row.id} className={`${hoverLiftClass} rounded-lg px-3 py-3`}>
+                    <HoverTip
+                      text={
+                        row.kind === "admin"
+                          ? "Office action: confirm, pending, cancel, or a service change."
+                          : "A request that came in from the website."
+                      }
+                    />
                     <div className="flex items-center justify-between gap-3">
-                      <p className="[font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]">
+                      <p className="flex items-center gap-1.5 [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]">
                         {row.title}
+                        <HoverMark />
                       </p>
                       <span
                         className={`rounded-full px-2 py-1 [font-family:'Geist',Helvetica] text-[10px] font-semibold uppercase tracking-wide ${
@@ -251,32 +264,17 @@ function QuickLink({ to, label }: { to: string; label: string }): JSX.Element {
 }
 
 function Stat({ label, value, tip }: { label: string; value: string; tip: string }): JSX.Element {
-  const tipId = `stat-${label.toLowerCase().replace(/\s+/g, "-")}`;
   return (
-    <article
-      tabIndex={0}
-      aria-describedby={tipId}
-      className="group relative z-0 cursor-help rounded-xl border border-slate-200 bg-white p-5 outline-none transition duration-200 hover:z-20 hover:-translate-y-0.5 hover:border-[#2a7a78] hover:shadow-[0_10px_24px_rgba(20,32,51,0.12)] focus-within:z-20 focus-within:-translate-y-0.5 focus-within:border-[#2a7a78] focus-within:shadow-[0_10px_24px_rgba(20,32,51,0.12)]"
-    >
+    <article className={`${hoverLiftClass} rounded-xl p-5`}>
+      <HoverTip text={tip} />
       <div className="flex items-center gap-1.5">
-        <p className="[font-family:'Geist',Helvetica] text-xs font-medium text-slate-500 transition group-hover:text-[#2a7a78] group-focus-within:text-[#2a7a78]">
+        <p className="[font-family:'Geist',Helvetica] text-xs font-medium text-slate-500 transition group-hover/hover:text-[#2a7a78]">
           {label}
         </p>
-        <Info
-          className="h-3.5 w-3.5 text-slate-400 transition group-hover:text-[#2a7a78] group-focus-within:text-[#2a7a78]"
-          aria-hidden
-        />
+        <HoverMark />
       </div>
       <p className="mt-2 [font-family:'Gabarito',Helvetica] text-3xl font-extrabold text-[#142033]">{value}</p>
       <p className="mt-2 [font-family:'Geist',Helvetica] text-xs text-slate-500">{tip}</p>
-      <p
-        id={tipId}
-        role="tooltip"
-        className="pointer-events-none invisible absolute bottom-full left-3 z-20 mb-2 w-max max-w-[13rem] rounded-md bg-[#142033] px-2.5 py-1.5 [font-family:'Geist',Helvetica] text-xs leading-4 text-white opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
-      >
-        {tip}
-        <span aria-hidden className="absolute -bottom-1 left-3 h-2 w-2 rotate-45 bg-[#142033]" />
-      </p>
     </article>
   );
 }
@@ -291,7 +289,7 @@ function Panel({
   children: JSX.Element;
 }): JSX.Element {
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-5">
+    <section className="overflow-visible rounded-xl border border-slate-200 bg-white p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="[font-family:'Gabarito',Helvetica] text-base font-extrabold text-[#142033]">{title}</h2>
         {extra}
