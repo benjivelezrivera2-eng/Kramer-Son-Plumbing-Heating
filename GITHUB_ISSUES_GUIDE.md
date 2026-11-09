@@ -17,7 +17,7 @@ If the issue says the work is in Vapi or Twilio, do not add that logic to this w
 1. List open issues: `gh issue list --repo benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating`.
 2. Pick the issue this chat will work on, or draft a new one if none fits.
 3. Confirm that choice with Benji. Wait for a yes before writing code.
-4. Write `IMPLEMENTATION/<number>-<slug>.md` for that issue. The plan names the outcome, the files to touch (or the Vapi / Twilio change, if the work is not in this repo), the steps, and how to verify.
+4. Write a plan under `IMPLEMENTATION PLANS/` for that issue. Name the file after the issue (for example `profiles.md`, not `IMPLEMENTATION_PLAN.md`). Keep the folder ordered by the work sequence we are in (earlier lessons / earlier tickets first). The folder index is `IMPLEMENTATION PLANS/implementation.md`. Add the new plan to that index. The plan names the outcome, the files to touch (or the Vapi / Twilio change, if the work is not in this repo), the steps, and how to verify.
 5. Only then write code.
 
 ## Issue format

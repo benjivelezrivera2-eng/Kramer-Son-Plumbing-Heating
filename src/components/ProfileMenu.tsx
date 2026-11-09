@@ -1,8 +1,8 @@
+import { ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../lib/AuthProvider";
 import {
-  presetSrc,
   profileDisplayName,
   profileInitials,
   signedAvatarUrl,
@@ -10,11 +10,18 @@ import {
 
 type ProfileMenuProps = {
   tone: "dark" | "light";
+  /** Sidebar uses `up`; header uses `down`. */
+  placement?: "up" | "down";
   onNavigate?: () => void;
 };
 
-export function ProfileMenu({ tone, onNavigate }: ProfileMenuProps): JSX.Element {
-  const { user, profile } = useAuth();
+export function ProfileMenu({
+  tone,
+  placement = "up",
+  onNavigate,
+}: ProfileMenuProps): JSX.Element {
+  const { user, profile, signOut } = useAuth();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -23,14 +30,8 @@ export function ProfileMenu({ tone, onNavigate }: ProfileMenuProps): JSX.Element
 
   useEffect(() => {
     let cancelled = false;
-    if (profile?.avatar_kind === "preset") {
-      setAvatarUrl(presetSrc(profile.avatar_path));
-      return () => {
-        cancelled = true;
-      };
-    }
-    if (profile?.avatar_kind === "upload" && profile.avatar_path) {
-      void signedAvatarUrl(profile.avatar_path).then((url) => {
+    if (profile?.avatar_url) {
+      void signedAvatarUrl(profile.avatar_url).then((url) => {
         if (!cancelled) setAvatarUrl(url);
       });
       return () => {
@@ -41,7 +42,7 @@ export function ProfileMenu({ tone, onNavigate }: ProfileMenuProps): JSX.Element
     return () => {
       cancelled = true;
     };
-  }, [profile?.avatar_kind, profile?.avatar_path]);
+  }, [profile?.avatar_url]);
 
   useEffect(() => {
     function handlePointer(event: MouseEvent) {
@@ -60,20 +61,28 @@ export function ProfileMenu({ tone, onNavigate }: ProfileMenuProps): JSX.Element
 
   const dark = tone === "dark";
   const buttonClass = dark
-    ? "flex w-full items-center gap-3 rounded-md px-1 py-1 text-left hover:bg-white/5"
-    : "flex w-full items-center gap-3 rounded-md px-1 py-1 text-left hover:bg-slate-50";
+    ? "flex w-full items-center gap-2 rounded-md px-1 py-1.5 text-left hover:bg-white/5"
+    : "flex w-full items-center gap-2 rounded-md px-1 py-1.5 text-left hover:bg-slate-50";
   const nameClass = dark
     ? "truncate [font-family:'Geist',Helvetica] text-sm font-semibold text-white"
     : "truncate [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]";
   const emailClass = dark
     ? "truncate [font-family:'Geist',Helvetica] text-xs text-slate-400"
     : "truncate [font-family:'Geist',Helvetica] text-xs text-slate-500";
+  const chevronClass = dark ? "h-4 w-4 shrink-0 text-slate-400" : "h-4 w-4 shrink-0 text-slate-500";
+  const menuPosition =
+    placement === "down"
+      ? "absolute left-0 right-0 top-full z-20 mt-2"
+      : "absolute bottom-full left-0 right-0 z-20 mb-2";
   const menuClass = dark
-    ? "absolute bottom-full left-0 right-0 z-20 mb-2 overflow-hidden rounded-md border border-white/10 bg-[#142033] shadow-lg"
-    : "absolute bottom-full left-0 right-0 z-20 mb-2 overflow-hidden rounded-md border border-slate-200 bg-white shadow-lg";
+    ? `${menuPosition} overflow-hidden rounded-md border border-white/10 bg-[#142033] shadow-lg`
+    : `${menuPosition} overflow-hidden rounded-md border border-slate-200 bg-white shadow-lg`;
+  const dividerClass = dark ? "border-b border-white/10 px-3 py-3" : "border-b border-slate-100 px-3 py-3";
   const itemClass = dark
     ? "flex h-11 items-center px-3 [font-family:'Geist',Helvetica] text-sm font-medium text-slate-200 hover:bg-white/5"
     : "flex h-11 items-center px-3 [font-family:'Geist',Helvetica] text-sm font-medium text-[#142033] hover:bg-slate-50";
+  const triggerLabel =
+    profile?.role === "admin" ? `${name} · Admin` : name;
 
   return (
     <div ref={rootRef} className="relative">
@@ -85,14 +94,15 @@ export function ProfileMenu({ tone, onNavigate }: ProfileMenuProps): JSX.Element
         onClick={() => setOpen((value) => !value)}
       >
         <AvatarMark src={avatarUrl} initials={initials} />
-        <span className="min-w-0 flex-1">
-          <span className={`block ${nameClass}`}>{name}</span>
-          <span className={`block ${emailClass}`}>{user?.email}</span>
-        </span>
+        <span className={`min-w-0 flex-1 ${nameClass}`}>{triggerLabel}</span>
+        <ChevronDown
+          className={`${chevronClass} transition-transform ${open ? "rotate-180" : ""}`}
+          aria-hidden
+        />
       </button>
       {open && (
         <div className={menuClass} role="menu">
-          <div className="border-b border-white/10 px-3 py-3">
+          <div className={dividerClass}>
             <p className={nameClass}>{name}</p>
             <p className={`mt-0.5 ${emailClass}`}>{user?.email}</p>
             {profile?.role === "admin" && (
@@ -113,7 +123,7 @@ export function ProfileMenu({ tone, onNavigate }: ProfileMenuProps): JSX.Element
             Profile
           </Link>
           <Link
-            to="/admin"
+            to="/admin/profile"
             role="menuitem"
             className={itemClass}
             onClick={() => {
@@ -121,8 +131,24 @@ export function ProfileMenu({ tone, onNavigate }: ProfileMenuProps): JSX.Element
               onNavigate?.();
             }}
           >
-            Office
+            Settings
           </Link>
+          <button
+            type="button"
+            role="menuitem"
+            className={`${itemClass} w-full text-left ${
+              dark ? "text-red-300 hover:bg-white/5" : "text-red-600 hover:bg-red-50"
+            }`}
+            onClick={() => {
+              setOpen(false);
+              onNavigate?.();
+              void signOut().then(() => {
+                navigate("/login", { replace: true });
+              });
+            }}
+          >
+            Sign out
+          </button>
         </div>
       )}
     </div>

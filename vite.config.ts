@@ -52,4 +52,7 @@ function shareMeta(): Plugin {
 export default defineConfig({
   plugins: [react(), shareMeta()],
   base: "/",
+  server: {
+    port: 8000,
+  },
 });

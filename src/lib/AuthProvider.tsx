@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -8,6 +9,7 @@ import {
 } from "react";
 import type { Session, User } from "@supabase/supabase-js";
 import { supabase } from "./supabase";
+import { fetchShopProfile, type ShopProfile } from "./profile";
 
 export type UserRole = "admin" | "user" | "client" | null;
 
@@ -15,8 +17,10 @@ type AuthContextValue = {
   session: Session | null;
   user: User | null;
   role: UserRole;
+  profile: ShopProfile | null;
   loading: boolean;
   passwordRecovery: boolean;
+  refreshProfile: () => Promise<void>;
   signIn: (
     email: string,
     password: string,
@@ -42,25 +46,28 @@ async function logAuthEvent(action: "auth.login" | "auth.logout", userId: string
   }
 }
 
-async function fetchRole(userId: string): Promise<UserRole> {
-  const { data, error } = await supabase
-    .from("profile")
-    .select("role")
-    .eq("user_id", userId)
-    .maybeSingle();
-
-  if (error || !data?.role) return null;
-  if (data.role === "admin" || data.role === "user" || data.role === "client") {
-    return data.role;
-  }
-  return null;
-}
-
 export function AuthProvider({ children }: { children: ReactNode }): JSX.Element {
   const [session, setSession] = useState<Session | null>(null);
   const [role, setRole] = useState<UserRole>(null);
+  const [profile, setProfile] = useState<ShopProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [passwordRecovery, setPasswordRecovery] = useState(false);
+
+  const loadProfile = useCallback(async (userId: string) => {
+    const next = await fetchShopProfile(userId);
+    setProfile(next);
+    setRole(next?.role ?? null);
+    return next;
+  }, []);
+
+  const refreshProfile = useCallback(async () => {
+    const userId = session?.user.id;
+    if (!userId) {
+      setProfile(null);
+      return;
+    }
+    await loadProfile(userId);
+  }, [loadProfile, session?.user.id]);
 
   useEffect(() => {
     let mounted = true;
@@ -73,6 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         if (!mounted) return;
         setSession(null);
         setRole(null);
+        setProfile(null);
         setPasswordRecovery(false);
         setLoading(false);
         return;
@@ -86,18 +94,20 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         return;
       }
 
-      const nextRole = await fetchRole(nextSession.user.id);
+      const nextProfile = await fetchShopProfile(nextSession.user.id);
       if (!mounted) return;
-      if (nextRole !== "admin") {
+      if (nextProfile?.role !== "admin") {
         setSession(null);
         setRole(null);
+        setProfile(null);
         setPasswordRecovery(false);
         setLoading(false);
         await supabase.auth.signOut({ scope: "local" });
         return;
       }
       setSession(nextSession);
-      setRole(nextRole);
+      setRole(nextProfile.role);
+      setProfile(nextProfile);
       setPasswordRecovery(false);
       setLoading(false);
     }
@@ -121,7 +131,6 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
           setSession(nextSession);
           return;
         }
-        // Querying Supabase inside this callback can deadlock the auth client.
         window.setTimeout(() => {
           void applySession(nextSession);
         }, 0);
@@ -139,8 +148,10 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       session,
       user: session?.user ?? null,
       role,
+      profile,
       loading,
       passwordRecovery,
+      refreshProfile,
       signIn: async (email, password) => {
         const { data, error } = await supabase.auth.signInWithPassword({
           email: email.trim(),
@@ -150,16 +161,18 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         if (!data.session || !data.user) {
           return { error: "That login did not work." };
         }
-        const nextRole = await fetchRole(data.user.id);
-        if (nextRole !== "admin") {
+        const nextProfile = await fetchShopProfile(data.user.id);
+        if (nextProfile?.role !== "admin") {
           setSession(null);
           setRole(null);
+          setProfile(null);
           setLoading(false);
           await supabase.auth.signOut({ scope: "local" });
           return { error: "access_denied" };
         }
         setSession(data.session);
-        setRole(nextRole);
+        setRole(nextProfile.role);
+        setProfile(nextProfile);
         setPasswordRecovery(false);
         setLoading(false);
         void logAuthEvent("auth.login", data.user.id);
@@ -175,6 +188,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         const userId = session?.user.id;
         setSession(null);
         setRole(null);
+        setProfile(null);
         setPasswordRecovery(false);
         setLoading(false);
         await supabase.auth.signOut({ scope: "local" });
@@ -183,7 +197,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         }
       },
     }),
-    [loading, passwordRecovery, role, session],
+    [loading, passwordRecovery, profile, refreshProfile, role, session],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
