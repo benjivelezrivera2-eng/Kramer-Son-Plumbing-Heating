@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { HoverMark, HoverTip, visitStatusTip } from "../../components/admin/HoverTip";
+import { visitStatusTip } from "../../components/admin/HoverTip";
 import { NoMatches, PageHeading, SkeletonRows, useMockReady } from "../../components/admin/MockBits";
 import {
   inOfficeRange,
@@ -198,13 +198,11 @@ export function MockBookingsPage(): JSX.Element {
                         }
                       }}
                       tabIndex={0}
-                      className="group/hover relative cursor-pointer border-b border-slate-100 outline-transparent transition last:border-0 hover:z-20 hover:bg-white hover:outline hover:outline-2 hover:outline-[#2a7a78] hover:shadow-[0_10px_24px_rgba(20,32,51,0.12)]"
+                      className="group/hover relative cursor-pointer border-b border-slate-100 outline-none transition last:border-0 hover:z-20 hover:bg-white hover:outline hover:outline-2 hover:outline-[#2a7a78] hover:shadow-[0_10px_24px_rgba(20,32,51,0.12)] focus:z-20 focus:bg-white focus:outline focus:outline-2 focus:outline-[#2a7a78] focus-visible:z-20 focus-visible:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#2a7a78]"
                     >
                       <td className="relative border-b border-slate-100 px-4 py-4">
-                        <HoverTip text={visitStatusTip(row.status)} />
-                        <p className="flex items-center gap-1.5 [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]">
+                        <p className="[font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]">
                           {row.client}
-                          <HoverMark />
                         </p>
                       </td>
                       <td className="border-b border-slate-100 px-4 py-4">
@@ -225,6 +223,9 @@ export function MockBookingsPage(): JSX.Element {
                         >
                           {row.status}
                         </span>
+                        <p className="ml-auto mt-1 max-w-[14rem] [font-family:'Geist',Helvetica] text-xs leading-4 text-slate-500">
+                          {visitStatusTip(row.status)}
+                        </p>
                       </td>
                     </tr>
                   );
@@ -309,7 +310,12 @@ function VisitDialog({
   onStatus: (status: MockBookingStatus) => void;
   onService: (service: string) => void;
 }): JSX.Element {
+  const [confirmingCancel, setConfirmingCancel] = useState(false);
   const price = visitPrice(visit);
+
+  useEffect(() => {
+    setConfirmingCancel(false);
+  }, [visit.id, visit.status]);
   const priceNote =
     price.source === "visit"
       ? "This visit has its own price."
@@ -377,15 +383,45 @@ function VisitDialog({
             <button
               key={action}
               type="button"
-              onClick={() => onStatus(action)}
+              onClick={() => {
+                if (action === "Cancelled") {
+                  setConfirmingCancel(true);
+                  return;
+                }
+                setConfirmingCancel(false);
+                onStatus(action);
+              }}
               className={`h-9 rounded-full px-3 [font-family:'Geist',Helvetica] text-sm font-semibold ${
                 visit.status === action ? "bg-[#142033] text-white" : "border border-slate-200 text-[#142033]"
               }`}
             >
-              {action === "Confirmed" ? "Confirm" : action === "Pending" ? "Mark pending" : "Cancel"}
+              {action === "Confirmed" ? "Confirm" : action === "Pending" ? "Mark pending" : "Cancel visit"}
             </button>
           ))}
         </div>
+        {confirmingCancel ? (
+          <div className="mt-3 rounded-md border border-slate-200 bg-slate-50 p-3">
+            <p className="[font-family:'Geist',Helvetica] text-sm text-[#142033]">
+              Cancel this visit? The job stays as it is until you confirm.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => onStatus("Cancelled")}
+                className="h-9 rounded-full bg-[#142033] px-3 [font-family:'Geist',Helvetica] text-sm font-semibold text-white"
+              >
+                Cancel visit
+              </button>
+              <button
+                type="button"
+                onClick={() => setConfirmingCancel(false)}
+                className="h-9 rounded-full border border-slate-200 px-3 [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]"
+              >
+                Keep this visit
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

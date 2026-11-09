@@ -7,7 +7,6 @@ export const business = {
     "Plumbing and heating for homes in Sterling, Fort Morgan, Brush, and Greeley. Call or book a visit window.",
   phoneDisplay: "(970) 555-0142",
   phoneHref: "tel:+19705550142",
-  calendlyUrl: "https://calendly.com/benjivelezrivera2/new-meeting",
   city: "Sterling, CO",
   hours: "Weekdays 8–5, plus after-hours emergencies",
   proposalNote: "Sterling, Fort Morgan, Brush, and Greeley",

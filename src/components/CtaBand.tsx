@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
 import { CallButton } from "./CallButton";
+import { useOpenBooking } from "./BookingDialog";
 import { Button } from "./ui/button";
 import { business } from "../config/business";
 
 export function CtaBand(): JSX.Element {
+  const openBooking = useOpenBooking();
   return (
     <section className="bg-[#142033] px-4 py-12 sm:px-8 lg:px-16">
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
@@ -25,11 +26,12 @@ export function CtaBand(): JSX.Element {
             <CallButton>Call {business.phoneDisplay}</CallButton>
           </Button>
           <Button
-            asChild
+            type="button"
             variant="outline"
+            onClick={() => openBooking()}
             className="h-11 border-white/30 bg-transparent [font-family:'Geist',Helvetica] text-sm font-semibold text-white hover:bg-white/10 hover:text-white"
           >
-            <Link to="/#book">Book a window</Link>
+            Book a visit
           </Button>
         </div>
       </div>

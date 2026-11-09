@@ -1,12 +1,15 @@
 import { Link, useParams } from "react-router-dom";
 import { CallButton } from "../components/CallButton";
+import { useOpenBooking } from "../components/BookingDialog";
 import { business } from "../config/business";
+import { bookJobLabel } from "../lib/bookLabel";
 import { slugify } from "../lib/shop";
 import { primaryButtonClassName, secondaryButtonClassName } from "../lib/ui";
 import { usePageTitle } from "../lib/usePageTitle";
 
 export function ServiceDetailPage(): JSX.Element {
   const { slug } = useParams<{ slug: string }>();
+  const openBooking = useOpenBooking();
   const service = business.services.find((item) => slugify(item.title) === slug);
   usePageTitle(service?.title ?? "Service");
 
@@ -32,9 +35,13 @@ export function ServiceDetailPage(): JSX.Element {
         {service.description}
       </p>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-        <Link to={`/book/${slugify(service.title)}`} className={primaryButtonClassName}>
-          Book this
-        </Link>
+        <button
+          type="button"
+          onClick={() => openBooking(service.title)}
+          className={primaryButtonClassName}
+        >
+          {bookJobLabel(service.title)}
+        </button>
         <Link to="/#contact" className={secondaryButtonClassName}>
           Request service
         </Link>

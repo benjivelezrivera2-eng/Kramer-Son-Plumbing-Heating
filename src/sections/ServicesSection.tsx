@@ -8,8 +8,9 @@ import {
   Wrench,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useOpenBooking } from "../components/BookingDialog";
 import { business } from "../config/business";
-import { slugify } from "../lib/shop";
+import { bookJobLabel } from "../lib/bookLabel";
 
 const serviceIcons: Record<string, typeof Droplets> = {
   "Drain Cleaning": Droplets,
@@ -24,7 +25,7 @@ const serviceIcons: Record<string, typeof Droplets> = {
   "Emergency / after-hours": Flame,
 };
 
-type Card = { title: string; description: string; slug: string };
+type Card = { title: string; description: string };
 
 type ServicesSectionProps = {
   limit?: number;
@@ -35,10 +36,8 @@ export function ServicesSection({
   limit,
   showCommercial = true,
 }: ServicesSectionProps): JSX.Element {
-  const items: Card[] = business.services.map((service) => ({
-    ...service,
-    slug: slugify(service.title),
-  }));
+  const openBooking = useOpenBooking();
+  const items: Card[] = business.services;
   const shown = limit ? items.slice(0, limit) : items;
 
   return (
@@ -52,8 +51,7 @@ export function ServicesSection({
             What we fix
           </h2>
           <p className="mt-2 max-w-xl [font-family:'Geist',Helvetica] text-sm leading-6 text-slate-600">
-            The common calls. If it is plumbing or heat, we will tell you what
-            it takes.
+            The common calls. Click a card to book that job. No account needed.
           </p>
         </div>
         {limit ? (
@@ -70,10 +68,11 @@ export function ServicesSection({
         {shown.map((service) => {
           const Icon = serviceIcons[service.title] ?? Wrench;
           return (
-            <Link
-              key={service.slug}
-              to={`/services/${service.slug}`}
-              className="flex flex-col gap-3 border border-slate-200 bg-[#f4f6f8] p-5 hover:border-[#2a7a78]"
+            <button
+              key={service.title}
+              type="button"
+              onClick={() => openBooking(service.title)}
+              className="flex h-full flex-col gap-3 border border-slate-200 bg-[#f4f6f8] p-5 text-left hover:border-[#2a7a78]"
             >
               <Icon className="h-8 w-8 text-[#2a7a78]" />
               <h3 className="[font-family:'Gabarito',Helvetica] text-lg font-bold text-[#142033]">
@@ -82,7 +81,10 @@ export function ServicesSection({
               <p className="[font-family:'Geist',Helvetica] text-sm leading-6 text-slate-700">
                 {service.description}
               </p>
-            </Link>
+              <span className="mt-auto [font-family:'Geist',Helvetica] text-sm font-semibold text-[#2a7a78]">
+                {bookJobLabel(service.title)}
+              </span>
+            </button>
           );
         })}
       </div>

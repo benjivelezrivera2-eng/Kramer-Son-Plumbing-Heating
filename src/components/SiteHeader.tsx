@@ -2,15 +2,15 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { business } from "../config/business";
-import { useAuth } from "../lib/AuthProvider";
+import { useOpenBooking } from "./BookingDialog";
 import { Button } from "./ui/button";
 
 const sectionNav = [
-  { label: "Home", to: "/#home", hash: "home" },
-  { label: "Services", to: "/#services", hash: "services" },
-  { label: "Book", to: "/#book", hash: "book" },
-  { label: "About", to: "/#about", hash: "about" },
-  { label: "Contact", to: "/#contact", hash: "contact" },
+  { label: "Home", to: "/#home", hash: "home", opensBooking: false },
+  { label: "Services", to: "/#services", hash: "services", opensBooking: false },
+  { label: "Book a visit", to: "", hash: "book", opensBooking: true },
+  { label: "About", to: "/#about", hash: "about", opensBooking: false },
+  { label: "Contact", to: "/#contact", hash: "contact", opensBooking: false },
 ];
 
 function sectionLinkClass(active: boolean): string {
@@ -23,15 +23,16 @@ function sectionLinkClass(active: boolean): string {
 }
 
 export function SiteHeader(): JSX.Element {
+  const openBooking = useOpenBooking();
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname, hash } = useLocation();
-  const { role } = useAuth();
-  const officeLink =
-    role === "admin"
-      ? { label: "Office", to: "/admin" }
-      : { label: "Shop login", to: "/login" };
   const activeHash = hash.replace(/^#/, "") || "home";
   const onMarketingHome = pathname === "/";
+
+  function openAndClose(): void {
+    setMenuOpen(false);
+    openBooking();
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur">
@@ -52,36 +53,37 @@ export function SiteHeader(): JSX.Element {
         <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
           <ul className="flex items-center gap-8">
             {sectionNav.map((item) => (
-              <li key={item.to}>
-                <Link
-                  to={item.to}
-                  className={sectionLinkClass(
-                    onMarketingHome && activeHash === item.hash,
-                  )}
-                >
-                  {item.label}
-                </Link>
+              <li key={item.label}>
+                {item.opensBooking ? (
+                  <button
+                    type="button"
+                    onClick={openAndClose}
+                    className={`${sectionLinkClass(false)} inline-flex h-11 items-center`}
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <Link
+                    to={item.to}
+                    className={sectionLinkClass(
+                      onMarketingHome && activeHash === item.hash,
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
-            <li>
-              <Link
-                to={officeLink.to}
-                className={sectionLinkClass(pathname.startsWith(officeLink.to))}
-              >
-                {officeLink.label}
-              </Link>
-            </li>
           </ul>
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
           <Button
-            asChild
+            type="button"
+            onClick={openAndClose}
             className="h-11 [font-family:'Geist',Helvetica] text-sm font-semibold"
           >
-            <Link to="/#services" onClick={() => setMenuOpen(false)}>
-              Book a service
-            </Link>
+            Book a visit
           </Button>
           <button
             type="button"
@@ -99,35 +101,31 @@ export function SiteHeader(): JSX.Element {
         <div className="border-t border-slate-200 bg-white px-4 py-3 lg:hidden">
           <ul className="flex flex-col">
             {sectionNav.map((item) => (
-              <li key={item.to}>
-                <Link
-                  to={item.to}
-                  onClick={() => setMenuOpen(false)}
-                  className={[
-                    "flex h-11 items-center rounded-md px-3 [font-family:'Geist',Helvetica] text-sm",
-                    onMarketingHome && activeHash === item.hash
-                      ? "bg-slate-100 font-semibold text-[#142033]"
-                      : "font-medium text-slate-700",
-                  ].join(" ")}
-                >
-                  {item.label}
-                </Link>
+              <li key={item.label}>
+                {item.opensBooking ? (
+                  <button
+                    type="button"
+                    onClick={openAndClose}
+                    className="flex h-11 items-center rounded-md px-3 [font-family:'Geist',Helvetica] text-sm font-medium text-slate-700"
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <Link
+                    to={item.to}
+                    onClick={() => setMenuOpen(false)}
+                    className={[
+                      "flex h-11 items-center rounded-md px-3 [font-family:'Geist',Helvetica] text-sm",
+                      onMarketingHome && activeHash === item.hash
+                        ? "bg-slate-100 font-semibold text-[#142033]"
+                        : "font-medium text-slate-700",
+                    ].join(" ")}
+                  >
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
-            <li>
-              <Link
-                to={officeLink.to}
-                onClick={() => setMenuOpen(false)}
-                className={[
-                  "flex h-11 items-center rounded-md px-3 [font-family:'Geist',Helvetica] text-sm",
-                  pathname.startsWith(officeLink.to)
-                    ? "bg-slate-100 font-semibold text-[#142033]"
-                    : "font-medium text-slate-700",
-                ].join(" ")}
-              >
-                {officeLink.label}
-              </Link>
-            </li>
           </ul>
         </div>
       )}
