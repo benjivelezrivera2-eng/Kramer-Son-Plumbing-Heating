@@ -45,6 +45,7 @@ One plan file per GitHub issue. Plans live here — not under a generic `IMPLEME
 | 13 | `13-site-wide-tips.md` | Local draft `.issue-12-site-wide-tips.md`. GitHub **#43** | One tip at a time, then the same tip on the rest of the site. Not started |
 | 13 | `13-admin-header.md` | [#44](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/44) | Office header: quick actions, plain bell, picture with no name. Header only |
 | 14 | `14-rows-per-page.md` | [#45](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/45) | Office sample lists: choose how many rows to show, then move between pages. Bookings first. Not started. No code until Benji says yes |
+| 21 | `21-email-automation.md` | [#51](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/51) and [#52](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/52) | Shop email when a visit is booked. The file records all eight email lessons. Lessons 5 through 8 are not in the issues. No code until Benji says yes |
 
 Read `07-services.md` on the BookingCRM branch. That file is the merged services plan. It holds all eight starting prices. There are no separate numbered starting-price plans.
 

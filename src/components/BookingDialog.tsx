@@ -12,6 +12,7 @@ import {
 } from "react";
 import { business } from "../config/business";
 import { fieldClassName, primaryButtonClassName, secondaryButtonClassName } from "../lib/ui";
+import { sendVisitEmails } from "../lib/visitEmail";
 
 export const expectedTech = "A Kramer & Son tech";
 
@@ -126,12 +127,14 @@ export function BookingForm({
       document.getElementById(`${idPrefix}-${first}`)?.focus();
       return;
     }
-    onConfirm({
+    const visit = {
       ...draft,
       name: draft.name.trim(),
       phone: draft.phone.trim(),
       address: draft.address.trim(),
-    });
+    };
+    sendVisitEmails(visit);
+    onConfirm(visit);
   }
 
   return (
