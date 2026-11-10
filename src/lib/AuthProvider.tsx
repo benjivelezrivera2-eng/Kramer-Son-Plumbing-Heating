@@ -44,9 +44,9 @@ async function logAuthEvent(action: "auth.login" | "auth.logout", userId: string
 
 async function fetchRole(userId: string): Promise<UserRole> {
   const { data, error } = await supabase
-    .from("profile")
+    .from("profiles")
     .select("role")
-    .eq("user_id", userId)
+    .eq("id", userId)
     .maybeSingle();
 
   if (error || !data?.role) return null;

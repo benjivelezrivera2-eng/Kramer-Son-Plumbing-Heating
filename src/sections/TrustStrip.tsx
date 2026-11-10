@@ -1,4 +1,4 @@
-import { Clock, MapPin, ShieldCheck } from "lucide-react";
+import { Clock, MapPin } from "lucide-react";
 import { business } from "../config/business";
 
 const items = [
@@ -12,11 +12,6 @@ const items = [
     label: "When we’re out",
     value: business.hours,
   },
-  {
-    icon: ShieldCheck,
-    label: "Price before we start",
-    value: "Written price before work starts",
-  },
 ] as const;
 
 export function TrustStrip(): JSX.Element {
@@ -25,7 +20,7 @@ export function TrustStrip(): JSX.Element {
       aria-label="Why homeowners call"
       className="border-y border-slate-200 bg-white px-4 py-6 sm:px-8 lg:px-16"
     >
-      <ul className="grid gap-4 sm:grid-cols-3 sm:gap-6">
+      <ul className="grid gap-4 sm:grid-cols-2 sm:gap-6">
         {items.map((item) => (
           <li key={item.label} className="flex items-start gap-3">
             <item.icon

@@ -11,9 +11,8 @@ export function AboutSection(): JSX.Element {
           A local {business.niche.toLowerCase()} shop
         </h2>
         <p className="mt-3 max-w-2xl [font-family:'Geist',Helvetica] text-base leading-7 text-slate-700">
-          {business.fullName} handles plumbing and heating for homes in{" "}
-          {business.city} and nearby towns. Call for the jobs that cannot wait,
-          or book a visit window.
+          Kramer & Son is a Sterling shop. The tech who takes the visit does the
+          work and cleans up before leaving.
         </p>
       </div>
       <ReasonsSection />

@@ -5,7 +5,6 @@ import { business } from "../config/business";
 
 const footerLinks = [
   { label: "Services", to: "/#services" },
-  { label: "Book", to: "/#book" },
   { label: "About", to: "/#about" },
   { label: "Contact", to: "/#contact" },
   { label: "Shop login", to: "/login" },
@@ -66,18 +65,15 @@ export function SiteFooter(): JSX.Element {
               to="/#contact"
               className="inline-flex h-11 items-center justify-center rounded-md border border-[#c9a04a] px-4 text-sm font-semibold text-[#c9a04a] hover:bg-white/5"
             >
-              Request service
+              Book a visit
             </Link>
           </div>
         </section>
       </div>
 
-      <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-12 border-t border-white/10 pt-6">
         <p className="[font-family:'Geist',Helvetica] text-xs text-slate-400">
           © {new Date().getFullYear()} {business.fullName}
-        </p>
-        <p className="[font-family:'Geist',Helvetica] text-xs text-slate-400">
-          {business.proposalNote}
         </p>
       </div>
     </footer>

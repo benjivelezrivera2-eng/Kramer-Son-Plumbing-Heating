@@ -15,7 +15,6 @@ import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import { NotificationBell } from "../components/admin/NotificationBell";
 import { ProfileMenu } from "../components/ProfileMenu";
-import { Input } from "../components/ui/input";
 import { business } from "../config/business";
 import {
   adminStatusTitle,
@@ -34,9 +33,9 @@ import {
 import { useShopLive } from "../lib/useShopLive";
 
 const navItems = [
-  { label: "Dashboard", to: "/admin", end: true, icon: LayoutDashboard },
+  { label: "Overview", to: "/admin", end: true, icon: LayoutDashboard },
   { label: "Services", to: "/admin/services", end: false, icon: Wrench },
-  { label: "Team", to: "/admin/clients", end: false, icon: Users },
+  { label: "Staff", to: "/admin/clients", end: false, icon: Users },
   { label: "Bookings", to: "/admin/bookings", end: false, icon: CalendarCheck },
 ];
 
@@ -50,12 +49,12 @@ const navClass = (isActive: boolean, collapsed: boolean) =>
   ].join(" ");
 
 function crumbsFor(pathname: string): string[] {
-  if (pathname.startsWith("/admin/services")) return ["Dashboard", "Services"];
-  if (pathname.startsWith("/admin/clients")) return ["Dashboard", "Team"];
-  if (pathname.startsWith("/admin/bookings")) return ["Dashboard", "Bookings"];
-  if (pathname.startsWith("/admin/profile")) return ["Dashboard", "Profile"];
-  if (pathname === "/admin") return ["Dashboard"];
-  return ["Dashboard", "Office"];
+  if (pathname.startsWith("/admin/services")) return ["Overview", "Services"];
+  if (pathname.startsWith("/admin/clients")) return ["Overview", "Staff"];
+  if (pathname.startsWith("/admin/bookings")) return ["Overview", "Bookings"];
+  if (pathname.startsWith("/admin/profile")) return ["Overview", "Profile"];
+  if (pathname === "/admin") return ["Overview"];
+  return ["Overview", "Office"];
 }
 
 export function AdminShell(): JSX.Element {
@@ -194,12 +193,12 @@ export function AdminShell(): JSX.Element {
               onSubmit={(event) => event.preventDefault()}
             >
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-              <Input
+              <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search services, clients, bookings"
-                aria-label="Search services, clients, bookings"
-                className="pl-9"
+                placeholder="Search services, staff, bookings"
+                aria-label="Search services, staff, bookings"
+                className="h-11 w-full rounded-md border border-slate-300 bg-white pl-9 pr-3 text-sm text-[#142033] placeholder:text-slate-400 focus-visible:border-[#2a7a78] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a7a78]"
               />
             </form>
             <QuickActions />
@@ -219,12 +218,12 @@ export function AdminShell(): JSX.Element {
           </div>
           <form className="relative mt-3 lg:hidden" role="search" onSubmit={(event) => event.preventDefault()}>
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <Input
+            <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search services, clients, bookings"
-              aria-label="Search services, clients, bookings"
-              className="pl-9"
+              placeholder="Search services, staff, bookings"
+              aria-label="Search services, staff, bookings"
+              className="h-11 w-full rounded-md border border-slate-300 bg-white pl-9 pr-3 text-sm text-[#142033] placeholder:text-slate-400 focus-visible:border-[#2a7a78] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a7a78]"
             />
           </form>
         </header>
@@ -263,7 +262,7 @@ export function AdminShell(): JSX.Element {
 
 const quickLinks = [
   { label: "Services", to: "/admin/services" },
-  { label: "Team", to: "/admin/clients" },
+  { label: "Staff", to: "/admin/clients" },
   { label: "Bookings", to: "/admin/bookings" },
 ];
 

@@ -11,7 +11,7 @@ export function ContactSection(): JSX.Element {
     >
       <div>
         <h2 className="[font-family:'Gabarito',Helvetica] text-[34px] font-extrabold text-[#142033] sm:text-[44px]">
-          Request a visit
+          Book a visit
         </h2>
         <p className="mt-3 mb-8 max-w-xl [font-family:'Geist',Helvetica] text-base leading-7 text-slate-700">
           Name, phone, and email, then pick a visit window on the next page.

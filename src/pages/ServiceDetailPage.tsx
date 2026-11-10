@@ -29,14 +29,11 @@ export function ServiceDetailPage(): JSX.Element {
         {service.title}
       </h1>
       <p className="mt-4 [font-family:'Geist',Helvetica] text-base leading-7 text-slate-700">
-        {service.description}
+        {service.detail}
       </p>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         <Link to={`/book/${slugify(service.title)}`} className={primaryButtonClassName}>
-          Book this
-        </Link>
-        <Link to="/#contact" className={secondaryButtonClassName}>
-          Request service
+          {`Book ${service.title.toLowerCase()}`}
         </Link>
         <CallButton className={secondaryButtonClassName}>
           Call {business.phoneDisplay}

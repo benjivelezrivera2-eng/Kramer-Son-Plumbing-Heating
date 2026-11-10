@@ -1,14 +1,12 @@
-import { Menu, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { business } from "../config/business";
-import { useAuth } from "../lib/AuthProvider";
-import { Button } from "./ui/button";
+import { CallButton } from "./CallButton";
 
 const sectionNav = [
   { label: "Home", to: "/#home", hash: "home" },
   { label: "Services", to: "/#services", hash: "services" },
-  { label: "Book", to: "/#book", hash: "book" },
   { label: "About", to: "/#about", hash: "about" },
   { label: "Contact", to: "/#contact", hash: "contact" },
 ];
@@ -25,11 +23,6 @@ function sectionLinkClass(active: boolean): string {
 export function SiteHeader(): JSX.Element {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname, hash } = useLocation();
-  const { role } = useAuth();
-  const officeLink =
-    role === "admin"
-      ? { label: "Office", to: "/admin" }
-      : { label: "Shop login", to: "/login" };
   const activeHash = hash.replace(/^#/, "") || "home";
   const onMarketingHome = pathname === "/";
 
@@ -41,7 +34,7 @@ export function SiteHeader(): JSX.Element {
           className="flex min-w-0 flex-col"
           onClick={() => setMenuOpen(false)}
         >
-          <span className="[font-family:'Gabarito',Helvetica] text-lg font-extrabold leading-tight text-[#142033] sm:text-[22px]">
+          <span className="truncate [font-family:'Gabarito',Helvetica] text-lg font-extrabold leading-tight text-[#142033] sm:text-[22px]">
             {business.name}
           </span>
           <span className="[font-family:'Geist',Helvetica] text-xs font-medium tracking-wide text-[#2a7a78] sm:text-sm">
@@ -63,26 +56,14 @@ export function SiteHeader(): JSX.Element {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                to={officeLink.to}
-                className={sectionLinkClass(pathname.startsWith(officeLink.to))}
-              >
-                {officeLink.label}
-              </Link>
-            </li>
           </ul>
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          <Button
-            asChild
-            className="h-11 [font-family:'Geist',Helvetica] text-sm font-semibold"
-          >
-            <Link to="/#services" onClick={() => setMenuOpen(false)}>
-              Book a service
-            </Link>
-          </Button>
+          <CallButton className="inline-flex h-11 items-center gap-2 whitespace-nowrap [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033] hover:text-[#2a7a78]">
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            {business.phoneDisplay}
+          </CallButton>
           <button
             type="button"
             aria-label="Toggle menu"
@@ -114,20 +95,6 @@ export function SiteHeader(): JSX.Element {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                to={officeLink.to}
-                onClick={() => setMenuOpen(false)}
-                className={[
-                  "flex h-11 items-center rounded-md px-3 [font-family:'Geist',Helvetica] text-sm",
-                  pathname.startsWith(officeLink.to)
-                    ? "bg-slate-100 font-semibold text-[#142033]"
-                    : "font-medium text-slate-700",
-                ].join(" ")}
-              >
-                {officeLink.label}
-              </Link>
-            </li>
           </ul>
         </div>
       )}

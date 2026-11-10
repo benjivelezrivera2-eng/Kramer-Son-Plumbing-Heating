@@ -37,7 +37,7 @@ const cardHelp = {
 } as const;
 
 export function MockDashboardPage(): JSX.Element {
-  usePageTitle("Dashboard");
+  usePageTitle("Overview");
   const { query, bookings: officeBookings, activity: officeActivity } = useOutletContext<OfficeContext>();
   const ready = useMockReady();
   const [range, setRange] = useState<OfficeDateRange>("all");
@@ -72,14 +72,14 @@ export function MockDashboardPage(): JSX.Element {
   return (
     <section className="w-full" aria-busy={!ready}>
       <PageHeading
-        title="Dashboard"
+        title="Overview"
         body="A wide view of the office. The cards count the same visits as Bookings, so a confirm, pending, or cancel shows up here."
       />
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-2">
           <QuickLink to="/admin/services" label="Services" />
-          <QuickLink to="/admin/clients" label="Team" />
+          <QuickLink to="/admin/clients" label="Staff" />
           <QuickLink to="/admin/bookings" label="Bookings" />
         </div>
         <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Date range">

@@ -73,7 +73,7 @@ export function ServicesSection({
             <Link
               key={service.slug}
               to={`/services/${service.slug}`}
-              className="flex flex-col gap-3 border border-slate-200 bg-[#f4f6f8] p-5 hover:border-[#2a7a78]"
+              className="flex h-full flex-col gap-3 border border-slate-200 bg-[#f4f6f8] p-5 hover:border-[#2a7a78]"
             >
               <Icon className="h-8 w-8 text-[#2a7a78]" />
               <h3 className="[font-family:'Gabarito',Helvetica] text-lg font-bold text-[#142033]">
@@ -82,6 +82,9 @@ export function ServicesSection({
               <p className="[font-family:'Geist',Helvetica] text-sm leading-6 text-slate-700">
                 {service.description}
               </p>
+              <span className="mt-auto [font-family:'Geist',Helvetica] text-sm font-semibold text-[#2a7a78]">
+                {`Book ${service.title.toLowerCase()}`}
+              </span>
             </Link>
           );
         })}

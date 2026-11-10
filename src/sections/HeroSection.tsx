@@ -38,7 +38,7 @@ export function HeroSection(): JSX.Element {
             size="lg"
             className="h-12 border-[#142033] [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033] hover:bg-[#142033]/5"
           >
-            <Link to="/#book">Book a window</Link>
+            <Link to="/#book">Book a visit</Link>
           </Button>
         </div>
       </div>

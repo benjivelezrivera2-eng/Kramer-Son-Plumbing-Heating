@@ -5,7 +5,7 @@ import { matchesQuery, mockClients, type OfficeContext } from "../../lib/adminMo
 import { usePageTitle } from "../../lib/usePageTitle";
 
 export function MockClientsPage(): JSX.Element {
-  usePageTitle("Team");
+  usePageTitle("Staff");
   const { query } = useOutletContext<OfficeContext>();
   const ready = useMockReady();
   const rows = mockClients.filter((row) =>
@@ -15,7 +15,7 @@ export function MockClientsPage(): JSX.Element {
   return (
     <section aria-busy={!ready}>
       <PageHeading
-        title="Team"
+        title="Staff"
         body="People who work at Kramer & Son. Names and numbers on this screen are samples."
       />
       <div className="mt-6">

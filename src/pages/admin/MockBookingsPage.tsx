@@ -122,7 +122,7 @@ export function MockBookingsPage(): JSX.Element {
     <section aria-busy={!ready}>
       <PageHeading
         title="Bookings"
-        body="Sample visits. Filter the list, click a heading to sort it, or open a row to confirm it, mark it pending, cancel it, or correct the service. The dashboard counts these same visits."
+        body="Sample visits. Filter the list, click a heading to sort it, or open a row to confirm it, mark it pending, cancel it, or correct the service. Overview counts these same visits."
       />
       <div className="mt-6 flex flex-wrap items-center gap-2">
         <FilterSelect

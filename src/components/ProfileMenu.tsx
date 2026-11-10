@@ -2,11 +2,7 @@ import { ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../lib/AuthProvider";
-import {
-  profileDisplayName,
-  profileInitials,
-  signedAvatarUrl,
-} from "../lib/profile";
+import { profileDisplayName, profileInitials } from "../lib/profile";
 
 type ProfileMenuProps = {
   tone: "dark" | "light";
@@ -23,29 +19,12 @@ export function ProfileMenu({
   onNavigate,
   showName = true,
 }: ProfileMenuProps): JSX.Element {
-  const { user, profile, signOut } = useAuth();
+  const { user, role, signOut } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
-  const name = profileDisplayName(profile, user?.email);
-  const initials = profileInitials(profile, user?.email);
-
-  useEffect(() => {
-    let cancelled = false;
-    if (profile?.avatar_url) {
-      void signedAvatarUrl(profile.avatar_url).then((url) => {
-        if (!cancelled) setAvatarUrl(url);
-      });
-      return () => {
-        cancelled = true;
-      };
-    }
-    setAvatarUrl(null);
-    return () => {
-      cancelled = true;
-    };
-  }, [profile?.avatar_url]);
+  const name = profileDisplayName(null, user?.email);
+  const initials = profileInitials(null, user?.email);
 
   useEffect(() => {
     function handlePointer(event: MouseEvent) {
@@ -87,8 +66,7 @@ export function ProfileMenu({
   const itemClass = dark
     ? "flex h-11 items-center px-3 [font-family:'Geist',Helvetica] text-sm font-medium text-slate-200 hover:bg-white/5"
     : "flex h-11 items-center px-3 [font-family:'Geist',Helvetica] text-sm font-medium text-[#142033] hover:bg-slate-50";
-  const triggerLabel =
-    profile?.role === "admin" ? `${name} · Admin` : name;
+  const triggerLabel = role === "admin" ? `${name} · Admin` : name;
 
   return (
     <div ref={rootRef} className="relative">
@@ -100,7 +78,7 @@ export function ProfileMenu({
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
       >
-        <AvatarMark src={avatarUrl} initials={initials} />
+        <AvatarMark src={null} initials={initials} />
         {showName && (
           <>
             <span className={`min-w-0 flex-1 ${nameClass}`}>{triggerLabel}</span>
@@ -116,7 +94,7 @@ export function ProfileMenu({
           <div className={dividerClass}>
             <p className={nameClass}>{name}</p>
             <p className={`mt-0.5 ${emailClass}`}>{user?.email}</p>
-            {profile?.role === "admin" && (
+            {role === "admin" && (
               <p className="mt-2 inline-flex rounded-full bg-[#c9a04a]/20 px-2 py-0.5 [font-family:'Geist',Helvetica] text-[10px] font-bold tracking-wide text-[#c9a04a]">
                 ADMIN
               </p>
