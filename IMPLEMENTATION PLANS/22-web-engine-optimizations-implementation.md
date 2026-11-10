@@ -4,7 +4,34 @@ Local plan 22. One file for one issue:
 
 - [Show Kramer when someone searches Sterling Plumbing](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/53)
 
-The guide keeps one plan per issue, so the lesson record and the Kramer steps both live here. No code until Benji says yes.
+The guide keeps one plan per issue, so the lesson record and the Kramer steps both live here. Benji approved the build. Coding is underway on pre-rendering and the on-page content.
+
+## Where this stands
+
+Recorded November 9, 2026.
+
+- `public/robots.txt` and `public/sitemap.xml` are live at `https://kramer-son-plumbing-heating.vercel.app`.
+- Bing Webmaster is verified with `public/BingSiteAuth.xml`. Leave that file in place.
+- Google Search Console is verified as a URL-prefix property, `https://kramer-son-plumbing-heating.vercel.app/`, using the HTML file `public/googlef71615b5ea9b7a7e.html`. Leave that file in place. A domain property was not verified, because that method needs a DNS record on `vercel.app`.
+- `sitemap.xml` is submitted in both consoles. Google reports success and 9 discovered pages. Bing's copy is processing.
+- Bing indexing was requested once for the homepage. Bing still says the URL cannot appear and indexing is not allowed.
+- The Google indexing request was made once on November 9 and again on November 10. Both hit the daily quota. Retry on November 11. Do not resubmit it on November 10.
+- A visibility check runs every morning at 7:00 AM local time (`npm run measure`, Windows task "Kramer visibility measurement"). The baseline is in `measurement/baseline.json`. Kramer does not yet appear for Sterling Plumbing, Fort Morgan Plumbing, or the nearby town searches. No backlinks or AI citations for this domain were found.
+- Pre-rendering writes a real HTML file per public URL during `npm run build` (`scripts/prerender.mjs`). The on-page content is in the working tree: 10 FAQs, 3 articles, JSON-LD, a title and description on each public page, and a footer last-updated date. This build is not deployed.
+
+## Article pages
+
+Recorded November 10, 2026. These three steps stay on issue 53. This plan does not open a second issue.
+
+1. **Sitemap.** Add these three articles to `sitemap.xml`, one canonical HTTPS URL each, no trailing slash:
+   - What to do when a water heater leaks in a Sterling home — `/articles/what-to-do-when-a-water-heater-leaks-in-a-sterling-home`
+   - How drain cleaning is priced before the work starts — `/articles/how-drain-cleaning-is-priced-before-the-work-starts`
+   - What a no-heat call looks like in northeastern Colorado — `/articles/what-a-no-heat-call-looks-like-in-northeastern-colorado`
+   The working-tree sitemap already lists all three, last modified 2026-11-09. The live sitemap still has the previous nine URLs and does not include them.
+
+2. **Pre-render.** `src/lib/publicPages.ts` builds those three paths from `business.articles`. `scripts/prerender.mjs` renders every page that list returns, and writes both `dist/articles/<slug>.html` and `dist/articles/<slug>/index.html`. That is already how the working tree is set up. Until that build is deployed, those live URLs still return the site shell.
+
+3. **Search Console, November 11.** After the daily quota resets, resubmit `sitemap.xml` and request indexing once. On November 10 the homepage and `/services/drain-cleaning` were both "Discovered - currently not indexed," and both indexing requests returned "Quota Exceeded." Do not resubmit or request indexing on November 10.
 
 The repo has no milestone named Demo ready for Monday calls, so this issue is not on it. Benji creates that milestone. This plan does not.
 
@@ -30,7 +57,7 @@ The seven lessons never name Kramer or Sterling. They walk an AI agency site on 
 
 ## What Kramer builds
 
-Today `index.html` has one title, "Business Name Plumbing & Heating", and no description. `vercel.json` rewrites every path to `/index.html`. There is no `public` folder, no robots.txt, and no sitemap. Public routes worth indexing are `/`, `/services/:slug`, and any new article URLs. `/services`, `/book`, `/about`, and `/contact` only redirect. `/book/:slug`, `/confirmation`, and `/b/:token` are visit flows, not pages to rank. `/admin` and the login routes stay out of the sitemap.
+The source `index.html` still starts from the placeholder title. The production build replaces that title per URL. `vercel.json` rewrites unknown paths to `/index.html`, and real files such as `robots.txt` and `sitemap.xml` are served first. Public routes worth indexing are `/`, `/services/:slug`, and `/articles/:slug`. `/services`, `/book`, `/about`, and `/contact` only redirect. `/book/:slug`, `/confirmation`, and `/b/:token` are visit flows, not pages to rank. `/admin` and the login routes stay out of the sitemap.
 
 Do the work in this order.
 
@@ -49,6 +76,6 @@ Do the work in this order.
 ## Done when
 
 - [ ] A search for "Sterling Plumbing" or a similar local plumbing search shows Kramer.
-- [ ] Each public URL is pre-rendered with its own title and description.
+- [x] Each public URL is pre-rendered with its own title and description.
 - [ ] robots.txt and sitemap.xml match the live public pages.
 - [ ] The sitemap is submitted in Google Search Console and Bing Webmaster, and indexing has been requested once.

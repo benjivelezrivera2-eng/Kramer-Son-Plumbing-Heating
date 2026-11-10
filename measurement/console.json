@@ -1,0 +1,13 @@
+{
+  "recordedAt": "2026-11-09T18:39:00-07:00",
+  "google": {
+    "homepageIndex": "discovered-not-indexed",
+    "sitemap": "success",
+    "discoveredPages": 9
+  },
+  "bing": {
+    "sitemap": "processing",
+    "homepageIndexingAllowed": false,
+    "siteScan": "queued"
+  }
+}

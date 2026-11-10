@@ -1,17 +1,16 @@
 import { Link, useParams } from "react-router-dom";
 import { CallButton } from "../components/CallButton";
+import { PageHead } from "../components/PageHead";
 import { useOpenBooking } from "../components/BookingDialog";
 import { business } from "../config/business";
 import { bookJobLabel } from "../lib/bookLabel";
 import { slugify } from "../lib/shop";
 import { primaryButtonClassName, secondaryButtonClassName } from "../lib/ui";
-import { usePageTitle } from "../lib/usePageTitle";
 
 export function ServiceDetailPage(): JSX.Element {
   const { slug } = useParams<{ slug: string }>();
   const openBooking = useOpenBooking();
   const service = business.services.find((item) => slugify(item.title) === slug);
-  usePageTitle(service?.title ?? "Service");
 
   if (!service) {
     return (
@@ -28,6 +27,7 @@ export function ServiceDetailPage(): JSX.Element {
 
   return (
     <section className="mx-auto w-full max-w-2xl px-4 py-12 sm:px-8 lg:py-16">
+      <PageHead path={`/services/${slug}`} />
       <h1 className="[font-family:'Gabarito',Helvetica] text-[34px] font-extrabold text-[#142033] sm:text-[44px]">
         {service.title}
       </h1>

@@ -50,7 +50,7 @@ export function HeroSection(): JSX.Element {
         width={940}
         height={650}
         loading="eager"
-        fetchPriority="high"
+        {...{ fetchpriority: "high" }}
         className="h-[240px] w-full shrink-0 rounded-lg object-cover sm:h-[360px] lg:h-[460px] lg:w-[520px]"
       />
     </section>

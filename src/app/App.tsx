@@ -26,6 +26,7 @@ import { AdminTechnicianDetailPage } from "../pages/admin/AdminTechnicianDetailP
 import { AdminTechniciansPage } from "../pages/admin/AdminTechniciansPage";
 import { BookPage } from "../pages/BookPage";
 import { ConfirmationPage } from "../pages/ConfirmationPage";
+import { ArticlePage } from "../pages/ArticlePage";
 import { HomePage } from "../pages/HomePage";
 import { ForgotPasswordPage } from "../pages/ForgotPasswordPage";
 import { LoginPage } from "../pages/LoginPage";
@@ -81,6 +82,7 @@ export function App(): JSX.Element {
               element={<Navigate to={{ pathname: "/", hash: "services" }} replace />}
             />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
+            <Route path="/articles/:slug" element={<ArticlePage />} />
             <Route
               path="/book"
               element={<Navigate to="/" replace />}

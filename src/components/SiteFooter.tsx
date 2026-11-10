@@ -1,8 +1,9 @@
 import { Phone } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useOpenBooking } from "./BookingDialog";
 import { CallButton } from "./CallButton";
 import { business } from "../config/business";
+import { formatUpdated, pageForPath } from "../lib/publicPages";
 
 const footerLinks = [
   { label: "Services", to: "/#services", opensBooking: false },
@@ -13,6 +14,8 @@ const footerLinks = [
 
 export function SiteFooter(): JSX.Element {
   const openBooking = useOpenBooking();
+  const { pathname } = useLocation();
+  const updated = pageForPath(pathname)?.updated ?? "2026-11-09";
   return (
     <footer className="w-full bg-[#142033] px-4 pb-10 pt-16 sm:px-8 lg:px-16">
       <div className="grid gap-10 md:grid-cols-[minmax(0,1.4fr)_auto_minmax(0,1fr)] md:justify-between">
@@ -88,7 +91,7 @@ export function SiteFooter(): JSX.Element {
           © {new Date().getFullYear()} {business.fullName}
         </p>
         <p className="[font-family:'Geist',Helvetica] text-xs text-slate-400">
-          {business.proposalNote}
+          Last updated {formatUpdated(updated)}. {business.proposalNote}
         </p>
       </div>
     </footer>

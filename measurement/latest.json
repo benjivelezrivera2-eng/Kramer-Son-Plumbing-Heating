@@ -1,0 +1,57 @@
+{
+  "capturedAt": "2026-11-10T14:00:07.781Z",
+  "signals": {
+    "site": {
+      "status": 200,
+      "title": "Kramer & Son Plumbing & Heating",
+      "description": "Plumbing and heating for homes in Sterling, Fort Morgan, Brush, and Greeley. Call or book a visit window.",
+      "canonical": "https://kramer-son-plumbing-heating.vercel.app/",
+      "jsonLd": false,
+      "robotsStatus": 200,
+      "robotsIsText": true,
+      "sitemapStatus": 200,
+      "sitemapUrls": 9
+    },
+    "queries": [
+      {
+        "query": "Sterling Plumbing",
+        "status": "checked",
+        "domainVisible": false
+      },
+      {
+        "query": "Fort Morgan Plumbing",
+        "status": "checked",
+        "domainVisible": false
+      },
+      {
+        "query": "plumber Sterling Colorado",
+        "status": "checked",
+        "domainVisible": false
+      },
+      {
+        "query": "Brush Colorado plumber",
+        "status": "checked",
+        "domainVisible": false
+      },
+      {
+        "query": "Greeley plumber",
+        "status": "checked",
+        "domainVisible": false
+      }
+    ],
+    "domainVisibleForAnyQuery": false,
+    "console": {
+      "google": {
+        "homepageIndex": "discovered-not-indexed",
+        "sitemap": "success",
+        "discoveredPages": 9
+      },
+      "bing": {
+        "sitemap": "processing",
+        "homepageIndexingAllowed": false,
+        "siteScan": "queued"
+      },
+      "source": "measurement/console.json"
+    }
+  }
+}

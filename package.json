@@ -6,7 +6,8 @@
   "description": "Kramer & Son Plumbing & Heating demo site",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build && node scripts/prerender.mjs",
+    "measure": "node scripts/measure-visibility.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.1",
