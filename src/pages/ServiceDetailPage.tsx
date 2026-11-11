@@ -5,6 +5,21 @@ import { slugify } from "../lib/shop";
 import { primaryButtonClassName, secondaryButtonClassName } from "../lib/ui";
 import { usePageTitle } from "../lib/usePageTitle";
 
+const servicePhotos: Record<string, { src: string; alt: string }> = {
+  "Drain Cleaning": {
+    src: "/photos/drain-cable.jpg",
+    alt: "Gloved hands on a kitchen sink drain under the cabinet.",
+  },
+  "Leak Detection": {
+    src: "/photos/leak-pipe.jpg",
+    alt: "A drop of water at a copper pipe joint under a sink.",
+  },
+  "Furnace & Heating Repair": {
+    src: "/photos/furnace.jpg",
+    alt: "A technician checking an open furnace with a meter.",
+  },
+};
+
 export function ServiceDetailPage(): JSX.Element {
   const { slug } = useParams<{ slug: string }>();
   const service = business.services.find((item) => slugify(item.title) === slug);
@@ -28,6 +43,13 @@ export function ServiceDetailPage(): JSX.Element {
       <h1 className="[font-family:'Gabarito',Helvetica] text-[34px] font-extrabold text-[#142033] sm:text-[44px]">
         {service.title}
       </h1>
+      {servicePhotos[service.title] ? (
+        <img
+          src={servicePhotos[service.title].src}
+          alt={servicePhotos[service.title].alt}
+          className="mt-6 h-64 w-full object-cover sm:h-80"
+        />
+      ) : null}
       <p className="mt-4 [font-family:'Geist',Helvetica] text-base leading-7 text-slate-700">
         {service.detail}
       </p>

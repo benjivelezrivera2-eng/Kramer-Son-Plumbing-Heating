@@ -48,6 +48,8 @@ One plan file per GitHub issue. Plans live here — not under a generic `IMPLEME
 | 21 | `21-email-automation.md` | [#51](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/51) and [#52](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/52) | Shop email when a visit is booked. The file records all eight email lessons. Lessons 5 through 8 are not in the issues. No code until Benji says yes |
 | 22 | `22-web-engine-optimizations-implementation.md` | [#53](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/53) | Public site: SEO, AEO, GEO, pre-render, robots, sitemap, Search Console, Bing, measurement. Success is Kramer showing up for "Sterling Plumbing" or a similar search. No code until Benji says yes |
 | 23 | `23-public-page-edit.md` | [#54](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/54) | Public page edit: phone in the header, Book a visit off the header and footer menu, each claim once, service cards open the service page. No code until Benji says yes |
+| 24 | `24-public-visual-pass.md` | [#56](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/56) | Public page visual pass on branch `design`. No copy changes. Coded on `design` |
+| 25 | `25-job-photos.md` | [#57](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/57) | Job photos on the public page. Branch `job-photos`. Keep the words. Inspiration only from the reference plumber site |
 
 Read `07-services.md` on the BookingCRM branch. That file is the merged services plan. It holds all eight starting prices. There are no separate numbered starting-price plans.
 
