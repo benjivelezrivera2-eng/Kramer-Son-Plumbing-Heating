@@ -2,6 +2,7 @@ import { Menu, Phone, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { business } from "../config/business";
+import { useOpenBooking } from "./BookingDialog";
 import { CallButton } from "./CallButton";
 
 const sectionNav = [
@@ -22,6 +23,7 @@ function sectionLinkClass(active: boolean): string {
 
 export function SiteHeader(): JSX.Element {
   const [menuOpen, setMenuOpen] = useState(false);
+  const openBooking = useOpenBooking();
   const { pathname, hash } = useLocation();
   const activeHash = hash.replace(/^#/, "") || "home";
   const onMarketingHome = pathname === "/";
@@ -60,10 +62,20 @@ export function SiteHeader(): JSX.Element {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          <CallButton className="inline-flex h-11 items-center gap-2 whitespace-nowrap [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033] hover:text-[#2a7a78]">
+          <CallButton className="hidden h-11 items-center gap-2 whitespace-nowrap [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033] hover:text-[#2a7a78] sm:inline-flex">
             <Phone className="h-4 w-4" aria-hidden="true" />
             {business.phoneDisplay}
           </CallButton>
+          <button
+            type="button"
+            onClick={() => {
+              setMenuOpen(false);
+              openBooking();
+            }}
+            className="hidden h-11 items-center rounded-md bg-[#c9a04a] px-4 text-sm font-semibold text-[#142033] hover:bg-[#b8903f] lg:inline-flex"
+          >
+            Book a visit
+          </button>
           <button
             type="button"
             aria-label="Toggle menu"
@@ -95,6 +107,18 @@ export function SiteHeader(): JSX.Element {
                 </Link>
               </li>
             ))}
+            <li>
+              <button
+                type="button"
+                onClick={() => {
+                  setMenuOpen(false);
+                  openBooking();
+                }}
+                className="mt-2 flex h-11 w-full items-center justify-center rounded-md bg-[#c9a04a] px-3 [font-family:'Geist',Helvetica] text-sm font-semibold text-[#142033]"
+              >
+                Book a visit
+              </button>
+            </li>
           </ul>
         </div>
       )}

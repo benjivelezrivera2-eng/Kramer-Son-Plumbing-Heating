@@ -81,10 +81,7 @@ export function App(): JSX.Element {
               element={<Navigate to={{ pathname: "/", hash: "services" }} replace />}
             />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
-            <Route
-              path="/book"
-              element={<Navigate to={{ pathname: "/", hash: "book" }} replace />}
-            />
+            <Route path="/book" element={<BookPage />} />
             <Route path="/book/:slug" element={<BookPage />} />
             <Route
               path="/about"

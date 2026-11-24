@@ -14,7 +14,7 @@ export function ServicesPage(): JSX.Element {
         </h1>
         <p className="mt-3 max-w-2xl [font-family:'Geist',Helvetica] text-base leading-7 text-slate-700">
           Residential and light commercial work. Call if you are not sure which
-          service you need — we will point you to the right visit.
+          service you need. We will point you to the right visit.
         </p>
       </section>
       <ServicesSection />

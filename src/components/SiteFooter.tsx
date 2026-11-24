@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useOpenBooking } from "./BookingDialog";
 import { CallButton } from "./CallButton";
 import { business } from "../config/business";
 
@@ -16,6 +17,8 @@ const metaClass =
   "[font-family:'Geist',Helvetica] text-sm font-medium leading-6 text-[#e4ebf2]";
 
 export function SiteFooter(): JSX.Element {
+  const openBooking = useOpenBooking();
+
   return (
     <footer className="w-full bg-[#142033] px-4 pt-16 pb-8 sm:px-8 lg:px-16">
       <div className="grid gap-10 md:grid-cols-[minmax(0,1.4fr)_auto_minmax(0,1fr)] md:justify-between">
@@ -57,12 +60,13 @@ export function SiteFooter(): JSX.Element {
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call now
             </CallButton>
-            <Link
-              to="/#contact"
+            <button
+              type="button"
+              onClick={() => openBooking()}
               className="[font-family:'Geist',Helvetica] text-sm font-medium leading-6 text-[#c9a04a] underline-offset-4 hover:underline"
             >
               Book a visit
-            </Link>
+            </button>
           </div>
         </section>
       </div>
