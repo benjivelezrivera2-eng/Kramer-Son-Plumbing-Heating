@@ -23,6 +23,9 @@ export const business = {
         "Clear stubborn clogs and get sinks, tubs, and main lines flowing again.",
       detail:
         "A sink, tub, or main line is backing up. The visit starts by finding whether the stoppage is one fixture, a branch, or the main. You hear the price before the machine runs.",
+      signs: "Slow drains, standing water, or a backup in a sink, tub, or floor drain.",
+      onSite: "We find where it is stopped, clear it, and say what caused it.",
+      window: "Often same-day when the schedule allows.",
     },
     {
       title: "Sewer Line Repair",
@@ -30,6 +33,9 @@ export const business = {
         "Find the break, repair the line, and keep wastewater where it belongs.",
       detail:
         "Wastewater is showing up where it should not. The visit finds the break first, then says whether it is a spot repair or a longer section, before anyone digs.",
+      signs: "Sewage smell, yard wet spots, or backups in more than one fixture.",
+      onSite: "We locate the break, price the repair, then dig only what is needed.",
+      window: "Weekday visit; emergency backups go to the front of the list.",
     },
     {
       title: "Water Heater Repair",
@@ -37,6 +43,9 @@ export const business = {
         "Diagnose tanks and tankless units, then fix them the same visit when we can.",
       detail:
         "The house is short on hot water, or the heater is leaking. The visit looks at the tank or the tankless unit and says what can be fixed that day.",
+      signs: "Little or no hot water, rumbling tank, or a drip at the heater.",
+      onSite: "We check the unit and fix it the same visit when the part is on the truck.",
+      window: "Often same-day for no hot water or an active leak.",
     },
     {
       title: "Water Heater Installation",
@@ -44,6 +53,9 @@ export const business = {
         "Size the replacement to the house and get hot water back on the same day.",
       detail:
         "The tank has failed, or the house needs a replacement. The replacement is sized to the house, and hot water is back the same day when the unit is on the truck.",
+      signs: "The tank failed, rusted out, or the house needs a properly sized replacement.",
+      onSite: "We size the unit to the house, set it, and get hot water back on.",
+      window: "Same day when the replacement is on the truck.",
     },
     {
       title: "Leak Detection",
@@ -51,6 +63,9 @@ export const business = {
         "Trace hidden leaks before they wreck floors, walls, or the water bill.",
       detail:
         "A bill jumped, or water is showing up in a wall or floor. The visit traces the leak before it spreads.",
+      signs: "A jumped water bill, damp walls or floors, or the meter spinning with nothing on.",
+      onSite: "We trace the leak first, then show you what to fix before it spreads.",
+      window: "Weekday visit; active flooding is an emergency call.",
     },
     {
       title: "Pipe & Water Line Repair",
@@ -58,6 +73,9 @@ export const business = {
         "Stop the leak, replace the bad section, and pressure-test before we leave.",
       detail:
         "A line is leaking or it has burst. The visit stops the water, replaces the bad section, and pressure-tests before leaving.",
+      signs: "A dripping joint, a burst line, or water where it should not be.",
+      onSite: "We shut it down, replace the bad section, and pressure-test before we leave.",
+      window: "Same-day when we can for active leaks.",
     },
     {
       title: "Toilet & Fixture Repair",
@@ -65,6 +83,9 @@ export const business = {
         "Running toilets, dripping faucets, and fixture swaps done cleanly.",
       detail:
         "A toilet keeps running, or a faucet will not stop dripping. The visit repairs it, or swaps the fixture, and leaves the area dry.",
+      signs: "A running toilet, a drip that will not stop, or a fixture that needs a swap.",
+      onSite: "We repair it or swap the fixture and leave the area dry.",
+      window: "Weekday morning or afternoon window.",
     },
     {
       title: "Furnace & Heating Repair",
@@ -72,6 +93,71 @@ export const business = {
         "Get heat back on, check the system, and tell you what it will take.",
       detail:
         "The heat is out. The visit checks the thermostat, filter, ignition, and flue before anyone talks about a new furnace.",
+      signs: "No heat, short cycling, or a furnace that will not stay running.",
+      onSite: "We check thermostat, filter, ignition, and flue, then price the fix before work starts.",
+      window: "No-heat calls go to the front of the list.",
+    },
+  ],
+  serviceCategories: [
+    {
+      title: "Drains",
+      summary: "Sinks, tubs, or the main line will not clear.",
+      signs: "Slow drains, standing water, or a backup in one or more fixtures.",
+      onSite: "We find the stoppage, clear it or repair the line, and tell you what caused it.",
+      window: "Often same-day when the schedule allows.",
+      photo: {
+        src: "/photos/category-drains.jpg",
+        alt: "Plumber clearing a kitchen sink drain under the cabinet.",
+      },
+      jobs: ["Drain Cleaning", "Sewer Line Repair"],
+    },
+    {
+      title: "Leaks & pipes",
+      summary: "Hidden leaks, burst lines, or a bill that jumped.",
+      signs: "Damp floors or walls, a spinning meter, or a line that burst.",
+      onSite: "We trace or stop the leak, replace the bad section, and pressure-test.",
+      window: "Same-day when we can for active leaks.",
+      photo: {
+        src: "/photos/category-leaks.jpg",
+        alt: "Water dripping from a copper pipe joint under a sink.",
+      },
+      jobs: ["Leak Detection", "Pipe & Water Line Repair"],
+    },
+    {
+      title: "Water heaters",
+      summary: "No hot water, a leaking tank, or a replacement.",
+      signs: "Little hot water, a drip at the heater, or a tank that failed.",
+      onSite: "We diagnose the unit, repair it, or size and install a replacement.",
+      window: "Often same-day for no hot water or an active leak.",
+      photo: {
+        src: "/photos/category-water-heaters.jpg",
+        alt: "Residential water heater with copper supply lines in a utility closet.",
+      },
+      jobs: ["Water Heater Repair", "Water Heater Installation"],
+    },
+    {
+      title: "Heat / furnace",
+      summary: "The house is cold or the furnace will not stay on.",
+      signs: "No heat, short cycling, or a furnace that will not ignite.",
+      onSite: "We check the system and price the repair before work starts.",
+      window: "No-heat calls go to the front of the list.",
+      photo: {
+        src: "/photos/category-heat.jpg",
+        alt: "Open residential furnace being checked with a meter.",
+      },
+      jobs: ["Furnace & Heating Repair"],
+    },
+    {
+      title: "Toilets & fixtures",
+      summary: "Running toilets, drips, and fixture swaps.",
+      signs: "A toilet that will not stop, a faucet drip, or a fixture that needs replacing.",
+      onSite: "We repair it or swap the fixture and leave the area dry.",
+      window: "Weekday morning or afternoon window.",
+      photo: {
+        src: "/photos/category-fixtures.jpg",
+        alt: "Bathroom vanity faucet and toilet in a clean residential bath.",
+      },
+      jobs: ["Toilet & Fixture Repair"],
     },
   ],
   commercial: {
@@ -111,10 +197,34 @@ export const business = {
     },
   ],
   areas: [
-    { name: "Sterling", note: "Home base. Same-day when the schedule allows." },
-    { name: "Fort Morgan", note: "On the regular route." },
-    { name: "Brush", note: "On the regular route." },
-    { name: "Greeley", note: "On the regular route." },
+    {
+      name: "Sterling",
+      note: "Home base. Same-day when the schedule allows.",
+      lat: 40.6256,
+      lng: -103.2077,
+      homeBase: true,
+    },
+    {
+      name: "Fort Morgan",
+      note: "On the regular route.",
+      lat: 40.2503,
+      lng: -103.8,
+      homeBase: false,
+    },
+    {
+      name: "Brush",
+      note: "On the regular route.",
+      lat: 40.2583,
+      lng: -103.623,
+      homeBase: false,
+    },
+    {
+      name: "Greeley",
+      note: "On the regular route.",
+      lat: 40.4233,
+      lng: -104.7091,
+      homeBase: false,
+    },
   ],
   reviews: [
     {

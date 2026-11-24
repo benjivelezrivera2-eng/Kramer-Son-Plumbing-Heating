@@ -1,6 +1,5 @@
 import { usePageTitle } from "../lib/usePageTitle";
 import { AboutSection } from "../sections/AboutSection";
-import { BookSection } from "../sections/BookSection";
 import { ContactSection } from "../sections/ContactSection";
 import { FaqSection } from "../sections/FaqSection";
 import { HeroSection } from "../sections/HeroSection";
@@ -19,7 +18,6 @@ export function HomePage(): JSX.Element {
       <ServicesSection />
       <AboutSection />
       <FaqSection />
-      <BookSection />
       <ContactSection />
     </>
   );

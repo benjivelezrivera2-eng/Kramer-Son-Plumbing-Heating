@@ -1,10 +1,12 @@
 import { Phone } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useOpenBooking } from "../components/BookingDialog";
 import { CallButton } from "../components/CallButton";
 import { Button } from "../components/ui/button";
 import { business } from "../config/business";
 
 export function HeroSection(): JSX.Element {
+  const openBooking = useOpenBooking();
+
   return (
     <section className="relative isolate min-h-[34rem] w-full overflow-hidden bg-[#142033] sm:min-h-[38rem] lg:min-h-[42rem]">
       <img
@@ -43,12 +45,12 @@ export function HeroSection(): JSX.Element {
               </CallButton>
             </Button>
             <Button
-              asChild
-              variant="outline"
+              type="button"
               size="lg"
-              className="h-12 border-white/80 bg-transparent text-sm font-semibold text-white [font-family:'Geist',Helvetica] hover:bg-white/10 hover:text-white"
+              onClick={() => openBooking()}
+              className="h-12 bg-white text-sm font-semibold text-[#142033] [font-family:'Geist',Helvetica] hover:bg-[#e4ebf2]"
             >
-              <Link to="/#book">Book a visit</Link>
+              Book a visit
             </Button>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
+import { BookingProvider } from "../components/BookingDialog";
 import { MobileCtaBar } from "../components/MobileCtaBar";
 import { ScrollToHash } from "../components/ScrollToHash";
 import { SiteFooter } from "../components/SiteFooter";
@@ -11,24 +12,28 @@ export function SiteShell(): JSX.Element {
     pathname === "/confirmation" || pathname.startsWith("/b/");
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-white">
-      <ScrollToHash />
-      <div className="bg-[#142033] px-4 py-1.5 sm:px-8 lg:px-16">
-        <p className="text-center [font-family:'Geist',Helvetica] text-xs text-slate-200 sm:text-left">
-          {business.proposalNote}
-        </p>
+    <BookingProvider>
+      <div className="flex min-h-screen w-full flex-col bg-white">
+        <ScrollToHash />
+        <div className="bg-[#142033] px-4 py-1.5 sm:px-8 lg:px-16">
+          <p className="text-center [font-family:'Geist',Helvetica] text-xs text-slate-200 sm:text-left">
+            {business.proposalNote}
+          </p>
+        </div>
+        <SiteHeader />
+        <main
+          className={[
+            "flex w-full flex-1 flex-col",
+            hideCallBar
+              ? ""
+              : "pb-[calc(6.5rem+env(safe-area-inset-bottom))] md:pb-0",
+          ].join(" ")}
+        >
+          <Outlet />
+        </main>
+        {!hideCallBar && <MobileCtaBar />}
+        <SiteFooter />
       </div>
-      <SiteHeader />
-      <main
-        className={[
-          "flex w-full flex-1 flex-col",
-          hideCallBar ? "" : "pb-24 md:pb-0",
-        ].join(" ")}
-      >
-        <Outlet />
-      </main>
-      {!hideCallBar && <MobileCtaBar />}
-      <SiteFooter />
-    </div>
+    </BookingProvider>
   );
 }

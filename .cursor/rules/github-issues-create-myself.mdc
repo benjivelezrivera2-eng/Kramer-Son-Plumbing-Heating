@@ -1,0 +1,14 @@
+---
+description: Create GitHub issues yourself when Benji references the issue/plan guides
+alwaysApply: true
+---
+
+# GitHub issues — create them yourself
+
+When Benji references `GITHUB_ISSUES_GUIDE.md` and/or `IMPLEMENTATION PLANS/implementation-guide.md`, or asks for issues / umbrella issues / plans:
+
+1. Create the issue with `gh issue create` yourself (Windows: write body to a temp file, use `--body-file`).
+2. Do **not** use GitHub MCP `issue_write` create flows that show a Submit form for Benji.
+3. Do **not** ask Benji to create the issue.
+4. Then write the plan under `IMPLEMENTATION PLANS/` named after the issue.
+5. No code until Benji approves the issue and plan in chat.
