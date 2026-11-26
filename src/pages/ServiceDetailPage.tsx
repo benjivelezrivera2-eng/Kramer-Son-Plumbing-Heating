@@ -90,7 +90,7 @@ export function ServiceDetailPage(): JSX.Element {
             onClick={() => openBooking(bookTitle)}
             className={primaryButtonClassName}
           >
-            Book this visit
+            Book a visit
           </button>
           <CallButton className={secondaryButtonClassName}>
             Call {business.phoneDisplay}
@@ -122,7 +122,7 @@ export function ServiceDetailPage(): JSX.Element {
                 onClick={() => openBooking(job.title)}
                 className={primaryButtonClassName}
               >
-                Book this visit
+                Book a visit
               </button>
             </li>
           ))}
@@ -187,7 +187,7 @@ export function ServiceDetailPage(): JSX.Element {
           onClick={() => openBooking(service.title)}
           className={primaryButtonClassName}
         >
-          Book this visit
+          Book a visit
         </button>
         <CallButton className={secondaryButtonClassName}>
           Call {business.phoneDisplay}

@@ -3,6 +3,7 @@ import { AboutSection } from "../sections/AboutSection";
 import { ContactSection } from "../sections/ContactSection";
 import { FaqSection } from "../sections/FaqSection";
 import { HeroSection } from "../sections/HeroSection";
+import { ProofRow } from "../sections/ProofRow";
 import { ServicesSection } from "../sections/ServicesSection";
 import { TrustStrip } from "../sections/TrustStrip";
 
@@ -14,6 +15,7 @@ export function HomePage(): JSX.Element {
       <div id="home" className="scroll-mt-24">
         <HeroSection />
         <TrustStrip />
+        <ProofRow />
       </div>
       <ServicesSection />
       <AboutSection />

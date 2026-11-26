@@ -30,9 +30,6 @@ export function HeroSection(): JSX.Element {
           <p className="mt-5 max-w-[38rem] [font-family:'Geist',Helvetica] text-base leading-7 text-[#e4ebf2]">
             {business.hero.body}
           </p>
-          <p className="mt-3 [font-family:'Geist',Helvetica] text-sm font-medium leading-6 text-[#e4ebf2]">
-            Same-day windows when we can
-          </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button
               asChild

@@ -1,4 +1,6 @@
+/** Demo public facts. REPLACE BEFORE THIS GOES LIVE. */
 export const business = {
+  isDemoData: true as const,
   name: "Kramer & Son",
   niche: "Plumbing & Heating",
   fullName: "Kramer & Son Plumbing & Heating",
@@ -9,11 +11,45 @@ export const business = {
   phoneHref: "tel:+19705550142",
   calendlyUrl: "https://calendly.com/benjivelezrivera2/new-meeting",
   city: "Sterling, CO",
+  owner: "Mike Kramer",
+  son: "Jake Kramer",
+  foundedYear: 1998,
+  /** Derived from foundedYear for the current calendar year (demo). */
+  yearsServing: new Date().getFullYear() - 1998,
+  license: "000000",
+  rating: 4.8,
+  reviewCount: 47,
+  sameDayCutoff: {
+    hour: 12,
+    minute: 0,
+    timezone: "America/Denver",
+    /** Display fragment for “Same day if you call by {display}.” */
+    display: "noon",
+  },
+  shopHours: {
+    timezone: "America/Denver",
+    /** Weekdays Mon–Fri */
+    openHour: 8,
+    openMinute: 0,
+    closeHour: 17,
+    closeMinute: 0,
+  },
+  /** Keep in sync with shopHours (weekdays 8–5). */
   hours: "Weekdays 8–5, plus after-hours emergencies",
+  closedHolidays: [
+    { name: "Thanksgiving", rule: "us-thanksgiving" as const },
+    { name: "Christmas Day", month: 12, day: 25 },
+    { name: "New Year's Day", month: 1, day: 1 },
+  ],
+  // TODO: replace-before-live — swap demo crew photo for an owner-approved shot
+  aboutPhoto: {
+    src: "/photos/crew-van.jpg",
+    alt: "Two Kramer techs beside the shop van.",
+  },
   proposalNote: "Sterling, Fort Morgan, Brush, and Greeley",
   hero: {
     headline: "No heat, a leak, or a drain that won't clear.",
-    body: "Same-day windows out of Sterling when the schedule allows. Call if it can't wait.",
+    body: "Same day if you call by noon. If it can't wait, call now.",
     imageAlt: "Technician working on a home plumbing and heating job",
   },
   services: [
@@ -25,7 +61,7 @@ export const business = {
         "A sink, tub, or main line is backing up. The visit starts by finding whether the stoppage is one fixture, a branch, or the main. You hear the price before the machine runs.",
       signs: "Slow drains, standing water, or a backup in a sink, tub, or floor drain.",
       onSite: "We find where it is stopped, clear it, and say what caused it.",
-      window: "Often same-day when the schedule allows.",
+      window: "Same day if you call by noon.",
     },
     {
       title: "Sewer Line Repair",
@@ -45,7 +81,7 @@ export const business = {
         "The house is short on hot water, or the heater is leaking. The visit looks at the tank or the tankless unit and says what can be fixed that day.",
       signs: "Little or no hot water, rumbling tank, or a drip at the heater.",
       onSite: "We check the unit and fix it the same visit when the part is on the truck.",
-      window: "Often same-day for no hot water or an active leak.",
+      window: "Same day if you call by noon.",
     },
     {
       title: "Water Heater Installation",
@@ -75,7 +111,7 @@ export const business = {
         "A line is leaking or it has burst. The visit stops the water, replaces the bad section, and pressure-tests before leaving.",
       signs: "A dripping joint, a burst line, or water where it should not be.",
       onSite: "We shut it down, replace the bad section, and pressure-test before we leave.",
-      window: "Same-day when we can for active leaks.",
+      window: "Same day if you call by noon.",
     },
     {
       title: "Toilet & Fixture Repair",
@@ -104,7 +140,7 @@ export const business = {
       summary: "Sinks, tubs, or the main line will not clear.",
       signs: "Slow drains, standing water, or a backup in one or more fixtures.",
       onSite: "We find the stoppage, clear it or repair the line, and tell you what caused it.",
-      window: "Often same-day when the schedule allows.",
+      window: "Same day if you call by noon.",
       photo: {
         src: "/photos/category-drains.jpg",
         alt: "Plumber clearing a kitchen sink drain under the cabinet.",
@@ -116,7 +152,7 @@ export const business = {
       summary: "Hidden leaks, burst lines, or a bill that jumped.",
       signs: "Damp floors or walls, a spinning meter, or a line that burst.",
       onSite: "We trace or stop the leak, replace the bad section, and pressure-test.",
-      window: "Same-day when we can for active leaks.",
+      window: "Same day if you call by noon.",
       photo: {
         src: "/photos/category-leaks.jpg",
         alt: "Water dripping from a copper pipe joint under a sink.",
@@ -128,7 +164,7 @@ export const business = {
       summary: "No hot water, a leaking tank, or a replacement.",
       signs: "Little hot water, a drip at the heater, or a tank that failed.",
       onSite: "We diagnose the unit, repair it, or size and install a replacement.",
-      window: "Often same-day for no hot water or an active leak.",
+      window: "Same day if you call by noon.",
       photo: {
         src: "/photos/category-water-heaters.jpg",
         alt: "Residential water heater with copper supply lines in a utility closet.",
@@ -166,30 +202,36 @@ export const business = {
   },
   reasons: [
     {
-      title: "Local dispatch",
-      description: "The truck leaves from the Sterling shop.",
+      title: "Dispatched from Sterling",
+      description:
+        "Your tech leaves from our Sterling shop and knows these roads.",
     },
     {
-      title: "Upfront pricing",
-      description: "You see the price before the work starts.",
+      title: "Flat price before work",
+      description:
+        "You approve the price on site before we touch anything. No add-ons after the fact.",
     },
     {
-      title: "Stocked trucks",
-      description: "Common parts ride with the tech so most jobs finish in one trip.",
+      title: "Parts on the truck",
+      description:
+        "Common valves, fittings, and water heater parts ride with us. Most calls finish in one trip.",
     },
     {
-      title: "Clean job sites",
-      description: "Shoes off, drop cloths down, and the workspace left tidy.",
+      title: "Clean when we leave",
+      description:
+        "Shoe covers, drop cloths, and a wipe-down before we go.",
     },
   ],
   process: [
     {
       title: "You call or book a window",
-      description: "Tell us what’s going on.",
+      description:
+        "Tell us what's going on. If water is running, say so and we move you up the list.",
     },
     {
       title: "We look it over and price it",
-      description: "On site we explain the options.",
+      description:
+        "We find the cause and give you a flat price and your options. You say yes or no.",
     },
     {
       title: "We fix it and clean up",
@@ -278,3 +320,8 @@ export const business = {
 } as const;
 
 export type BusinessConfig = typeof business;
+
+/** Shared same-day promise line (no em dash). */
+export function sameDayCutoffLine(): string {
+  return `Same day if you call by ${business.sameDayCutoff.display}.`;
+}

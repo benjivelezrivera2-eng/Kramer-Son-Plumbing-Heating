@@ -50,7 +50,7 @@ function CategoryTile({
         </p>
         <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
           <button type="button" onClick={onBook} className={primaryButtonClassName}>
-            Book this visit
+            Book a visit
           </button>
           <button
             type="button"
