@@ -4,6 +4,7 @@ import { ContactSection } from "../sections/ContactSection";
 import { FaqSection } from "../sections/FaqSection";
 import { HeroSection } from "../sections/HeroSection";
 import { ProofRow } from "../sections/ProofRow";
+import { ReviewsSection } from "../sections/ReviewsSection";
 import { ServicesSection } from "../sections/ServicesSection";
 import { TrustStrip } from "../sections/TrustStrip";
 
@@ -19,6 +20,7 @@ export function HomePage(): JSX.Element {
       </div>
       <ServicesSection />
       <AboutSection />
+      <ReviewsSection />
       <FaqSection />
       <ContactSection />
     </>

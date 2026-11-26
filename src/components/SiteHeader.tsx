@@ -9,6 +9,7 @@ const sectionNav = [
   { label: "Home", to: "/#home", hash: "home" },
   { label: "Services", to: "/#services", hash: "services" },
   { label: "About", to: "/#about", hash: "about" },
+  { label: "FAQ", to: "/#faq", hash: "faq" },
   { label: "Contact", to: "/#contact", hash: "contact" },
 ];
 

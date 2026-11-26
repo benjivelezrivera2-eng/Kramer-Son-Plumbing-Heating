@@ -8,8 +8,9 @@ export function ReviewsSection(): JSX.Element {
       <h2 className="[font-family:'Gabarito',Helvetica] text-[28px] font-extrabold text-[#142033] sm:text-[36px]">
         From recent jobs
       </h2>
+      {/* REPLACE BEFORE LIVE: demo sample quotes, not real reviews */}
       <p className="mt-2 [font-family:'Geist',Helvetica] text-sm text-slate-500">
-        Examples for this demo site.
+        Sample quotes for this demo site.
       </p>
       <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3">
         {business.reviews.map((review) => (
