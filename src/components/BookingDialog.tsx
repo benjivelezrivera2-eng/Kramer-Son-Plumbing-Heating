@@ -16,8 +16,11 @@ import {
   primaryJobTitle,
   type ServiceCategory,
 } from "../lib/publicServices";
+import { visitDayOptions, type VisitDayOption } from "../lib/shopHours";
 import { fieldClassName, primaryButtonClassName, secondaryButtonClassName } from "../lib/ui";
 import { sendVisitEmails } from "../lib/visitEmail";
+
+export { visitDayOptions };
 
 export type OpenBookingOptions = {
   service?: string;
@@ -38,8 +41,6 @@ export type BookingDraft = {
   window: VisitWindow;
 };
 
-type DayOption = { value: string; label: string };
-
 const problems = [
   { label: "Drain or clog", service: "Drain Cleaning" },
   { label: "Leak or water damage", service: "Leak Detection" },
@@ -58,32 +59,7 @@ export function emptyBooking(service = ""): BookingDraft {
   };
 }
 
-export function visitDayOptions(today = new Date()): DayOption[] {
-  const options: DayOption[] = [];
-  const cursor = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  while (options.length < 6) {
-    const weekday = cursor.getDay();
-    if (weekday !== 0 && weekday !== 6) {
-      const value = [
-        cursor.getFullYear(),
-        String(cursor.getMonth() + 1).padStart(2, "0"),
-        String(cursor.getDate()).padStart(2, "0"),
-      ].join("-");
-      options.push({
-        value,
-        label: cursor.toLocaleDateString("en-US", {
-          weekday: "long",
-          month: "short",
-          day: "numeric",
-        }),
-      });
-    }
-    cursor.setDate(cursor.getDate() + 1);
-  }
-  return options;
-}
-
-export function dayLabel(value: string, options: DayOption[]): string {
+export function dayLabel(value: string, options: VisitDayOption[]): string {
   return options.find((day) => day.value === value)?.label ?? value;
 }
 
@@ -269,7 +245,7 @@ export function BookingForm({
           </button>
         ) : null}
         <button type="submit" className={primaryButtonClassName}>
-          Book this job
+          Book a visit
         </button>
       </div>
     </form>
@@ -438,7 +414,7 @@ function CategoryInfoStep({
           onClick={() => onBook(selected)}
           className={primaryButtonClassName}
         >
-          Book this visit
+          Book a visit
         </button>
       </div>
       <p className="[font-family:'Geist',Helvetica] text-sm leading-6 text-slate-600">

@@ -51,6 +51,7 @@ One plan file per GitHub issue. Plans live here — not under a generic `IMPLEME
 | 24 | `24-public-visual-pass.md` | [#56](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/56) | Public page visual pass on branch `design`. No copy changes. Coded on `design` |
 | 25 | `25-job-photos.md` | [#57](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/57) | Job photos on the public page. Branch `job-photos`. Keep the words. Inspiration only from the reference plumber site |
 | 26 | `26-overhaul-public-services-and-booking-together.md` | [#59](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/59) | Public services, booking, site-wide CTAs, and Service area map. Branch `services-booking-overhaul`. Service area map still open |
+| 27 | `27-demo-public-copy-proof.md` | [#61](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/61)–[#70](https://github.com/benjivelezrivera2-eng/Kramer-Son-Plumbing-Heating/issues/70) | Demo public copy/proof pass. Branch `demo-public-copy-proof`. Per-issue plans `28`–`37`. No code until Benji approves the batch plan |
 
 Read `07-services.md` on the BookingCRM branch. That file is the merged services plan. It holds all eight starting prices. There are no separate numbered starting-price plans.
 

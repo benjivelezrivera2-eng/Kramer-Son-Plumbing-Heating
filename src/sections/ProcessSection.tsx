@@ -9,10 +9,14 @@ export function ProcessSection(): JSX.Element {
       <ol className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3">
         {business.process.map((step, index) => (
           <li key={step.title}>
-            <p className="mb-2 [font-family:'Geist',Helvetica] text-sm font-medium leading-6 text-[#2a7a78]">
-              Step {index + 1}
+            <p
+              aria-hidden="true"
+              className="mb-3 [font-family:'Gabarito',Helvetica] text-5xl font-extrabold leading-none tracking-[-0.03em] text-[#142033]"
+            >
+              {index + 1}
             </p>
             <h3 className="[font-family:'Gabarito',Helvetica] text-xl font-bold leading-snug text-[#142033]">
+              <span className="sr-only">Step {index + 1}. </span>
               {step.title}
             </h3>
             <p className="mt-2 [font-family:'Geist',Helvetica] text-base leading-7 text-[#3d4a5c]">
