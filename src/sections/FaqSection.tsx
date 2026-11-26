@@ -8,7 +8,7 @@ import { business } from "../config/business";
 
 export function FaqSection(): JSX.Element {
   return (
-    <section className="bg-[#f4f6f8] px-4 py-16 sm:px-8 lg:px-16">
+    <section id="faq" className="scroll-mt-24 bg-[#f4f6f8] px-4 py-16 sm:px-8 lg:px-16">
       <h2 className="[font-family:'Gabarito',Helvetica] text-3xl font-bold leading-tight tracking-[-0.02em] text-[#142033] sm:text-4xl">
         FAQ
       </h2>

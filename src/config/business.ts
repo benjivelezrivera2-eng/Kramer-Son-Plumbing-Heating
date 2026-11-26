@@ -268,21 +268,22 @@ export const business = {
       homeBase: false,
     },
   ],
+  // TODO: REPLACE BEFORE LIVE — fictional demo quotes; swap for real customer reviews
   reviews: [
     {
       name: "Marcus G.",
       quote:
-        "Water heater died on a Thursday. They were here Friday morning, priced it first, and left the utility room cleaner than they found it.",
+        "Water heater quit on a cold Sterling night. They came the next morning, priced the fix first, and left the utility room cleaner than they found it.",
     },
     {
       name: "Elena R.",
       quote:
-        "Main line was backing up. They found the clog, cleared it, and explained what caused it without the hard sell.",
+        "Main line was backing up at our place near downtown. They found the clog, cleared it, and explained what caused it without the hard sell.",
     },
     {
       name: "Robert T.",
       quote:
-        "Pressure regulator was shot. They had the part on the truck and swapped it while they were already here.",
+        "No heat before a Fort Morgan weekend. They had the part on the truck and got the furnace running the same visit.",
     },
   ],
   faqs: [
